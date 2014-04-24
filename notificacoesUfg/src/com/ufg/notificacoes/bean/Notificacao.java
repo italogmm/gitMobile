@@ -10,6 +10,17 @@ public class Notificacao {
 	private Long timeData;
 	private String texto;
 	
+	public Notificacao(){}
+	
+	public Notificacao(String texto){
+		this.texto = texto;
+	}
+	
+	public Notificacao(String remetente, String texto){
+		this.texto = texto;
+		this.remetente = remetente;
+	}
+	
 	public Long getId() {
 		return id;
 	}

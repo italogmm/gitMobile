@@ -1,0 +1,44 @@
+package com.ufg.notificacao.main;
+
+import java.io.IOException;
+
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.Result;
+import com.google.android.gcm.server.Sender;
+
+public class EnviaNotificacao {
+
+	private static final String ID_DISPOSITIVO_GCM = "APA91bHKGJz7HDkrgD6K_C8_yKqv99PqEKcs-c5CFQCWStTcdcZ3ev10lgeU0tsYcYxAnGM8-tOoAyrIokKZO2MhO3nn1SzOHXuOpvlqu4c_uwAWJkAmZLBL7mq2is1H-XZeFzrF-ANervFE_NPW93xrN9Zgb7BfNelfmPEmAtu0e96oWyqHBV8";
+
+	private static final String API_KEY = "AIzaSyBEDsYiT6Vqp-Wh2FEJPOEuFEG-pVrVRcQ";
+
+	public static void main(String[] args) {
+		
+		Sender sender = new Sender(API_KEY);
+		Message message = new Message.Builder()
+				.collapseKey("1")
+				.timeToLive(3)
+				.delayWhileIdle(true)
+				.addData("mensagem", // identificador da mensagem
+						"Um grupo de 3 portugueses queriam falar político,ou seja,falar com classe e um brasileiro que passeava em Portugal ensinou: -Quando forem falar político façam o seguinte: -Manel,fale:-Eu eu,Joaquim fale:-Por 5 centavos e você Antônio fale:-Acho justo." +
+						" Então seguiram pela estrada os 3 portugueses até que encontraram um homem morto e ficaram lá olhando até que chegou a polícia.O guarda perguntou: -Quem matou esse sujeito?Manel respondeu:-Eu eu. Perguntou o guarda: "+
+						"  -Por que ou por quanto?Joaquim respondeu:-Por 5 centavos.E disse o guarda: "+
+						"  -Então vou prender vocês.E Antônio falou:-Acho justo. " +
+						"  E eles foram presos.")
+				.build();
+
+		Result result = null;
+
+		try {
+			result = sender.send(message, ID_DISPOSITIVO_GCM, 1);
+			String canonicalRegId = result.getCanonicalRegistrationId();
+			System.out.println("canonicalRegId: " + canonicalRegId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Imprime o resultado do envio na saída padrão
+		if (result != null)
+			System.out.println(result.toString());
+	}
+}
