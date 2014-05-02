@@ -1,5 +1,0 @@
-package com.ufg.notificacoes.util;
-
-public class GoogleCloudMessaging {
-
-}

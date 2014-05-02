@@ -20,7 +20,7 @@ public class EnviaNotificacao {
 				.timeToLive(3)
 				.delayWhileIdle(true)
 				.addData("mensagem", // identificador da mensagem
-						"sd asd asd asd asd asd asd asd")
+						"##MSGMETADATA:Edmundo Sergio##MSGMETADATA:Engenharia de Software##MSGMETADATA:Comunicado geral##MSGMETADATA: A universidade estar‡ fechada na pr—xima semana!")
 				.build();
 
 		Result result = null;

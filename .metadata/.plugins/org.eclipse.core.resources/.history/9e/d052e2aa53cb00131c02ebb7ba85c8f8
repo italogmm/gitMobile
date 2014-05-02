@@ -1,7 +1,0 @@
-package com.ufg.notificacoes.bean;
-
-public class Notificacao {
-	
-	private String remetentel
-
-}

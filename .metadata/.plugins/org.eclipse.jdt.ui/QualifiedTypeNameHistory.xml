@@ -5,4 +5,7 @@
 <fullyQualifiedTypeName name="android.app.TaskStackBuilder"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="com.google.android.gcm.server.Result"/>
+<fullyQualifiedTypeName name="android.support.v7.internal.widget.AdapterViewICS.OnItemClickListener"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
 </qualifiedTypeNameHistroy>

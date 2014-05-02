@@ -4,9 +4,11 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ufg.notificacoes.bean.Notificacao;
@@ -48,6 +50,13 @@ public class MainActivity extends ActionBarActivity {
 		lvListagem = (ListView) findViewById(R.id.lvListagem);
 		this.adapter = new ArrayAdapter<Notificacao>(this, adapterLayout, notificacoes);
 		this.lvListagem.setAdapter(adapter);
+		lvListagem.setOnItemClickListener(new OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> Parent, View view, int position,
+                long id) {
+        	Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_LONG).show();
+        
+        }});
 	}
 	
 	@Override
