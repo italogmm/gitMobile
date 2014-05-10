@@ -23,6 +23,10 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 	
 	private static final String TAG = "CADASTRO_NOTIFICACOES";
 	
+	public NotificacaoDao(){
+		super(null, DATABASE, null, VERSAO);
+	}
+	
 	public NotificacaoDao(Context context){
 		super(context, DATABASE, null, VERSAO);
 	}

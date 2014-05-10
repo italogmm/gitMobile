@@ -19,6 +19,7 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.ufg.notificacoes.permission.C2D_MESSAGE" />
+    <instrumentation android:targetPackage="com.ufg.notificacoes" android:name="android.test.InstrumentationTestRunner"></instrumentation>
 
     <application
         android:allowBackup="true"
@@ -56,6 +57,7 @@
             android:name="com.ufg.notificacoes.Inicio"
             android:label="@string/title_activity_inicio" >
         </activity>
+        
+        <uses-library android:name="android.test.runner" />
     </application>
-
 </manifest>
