@@ -1,0 +1,15 @@
+package com.ufg.notificacoes.test;
+
+import com.ufg.notificacoes.bean.Notificacao;
+
+import junit.framework.Assert;
+import android.test.AndroidTestCase;
+
+public class NotificacaoTest extends AndroidTestCase {
+	
+	public void incluirNotificacao() throws Exception{
+		Notificacao notificacao = new Notificacao();
+		notificacao.setRemetente("UFG");
+		notificacao.setTexto("A UFG estar‡ fechada do dia 2 ao dia 10 de agosto.");
+	}
+}

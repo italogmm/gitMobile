@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="android.database.SQLException"/>
 <fullyQualifiedTypeName name="android.app.TaskStackBuilder"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
@@ -8,4 +7,10 @@
 <fullyQualifiedTypeName name="com.google.android.gcm.server.Result"/>
 <fullyQualifiedTypeName name="android.support.v7.internal.widget.AdapterViewICS.OnItemClickListener"/>
 <fullyQualifiedTypeName name="android.widget.AdapterView.OnItemClickListener"/>
+<fullyQualifiedTypeName name="android.test.AndroidTestCase"/>
+<fullyQualifiedTypeName name="java.lang.AssertionError"/>
+<fullyQualifiedTypeName name="junit.framework.Assert"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.bean.Notificacao"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.NotificacaoDao"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,7 @@
+package com.ufg.notificacoes.bean;
+
+public class Disciplina {
+	
+	private Long id;
+	private String nome;
+}

@@ -1,0 +1,10 @@
+package com.ufg.notificacoes.test;
+
+import android.test.AndroidTestCase;
+
+public class NotificacaoTest extends AndroidTestCase {
+	
+	
+	
+
+}
