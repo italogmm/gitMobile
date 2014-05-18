@@ -19,7 +19,11 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.ufg.notificacoes.permission.C2D_MESSAGE" />
-    <instrumentation android:targetPackage="com.ufg.notificacoes" android:name="android.test.InstrumentationTestRunner"></instrumentation>
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.ufg.notificacoes" >
+    </instrumentation>
 
     <application
         android:allowBackup="true"
@@ -50,6 +54,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,7 +62,13 @@
             android:name="com.ufg.notificacoes.Inicio"
             android:label="@string/title_activity_inicio" >
         </activity>
-        
+
         <uses-library android:name="android.test.runner" />
+
+        <activity
+            android:name="com.ufg.notificacoes.ConsultaNotificacao"
+            android:label="@string/title_activity_consulta_notificacao" >
+        </activity>
     </application>
+
 </manifest>
