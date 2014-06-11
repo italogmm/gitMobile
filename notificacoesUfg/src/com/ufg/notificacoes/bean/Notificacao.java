@@ -21,6 +21,12 @@ public class Notificacao {
 		this.remetente = remetente;
 	}
 	
+	public Notificacao(String remetente, String texto, Date data){
+		this.texto = texto;
+		this.remetente = remetente;
+		this.timeData = data.getTime();
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -45,6 +51,15 @@ public class Notificacao {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+	public String getDataFormatada(){
+		if(timeData == null)
+			return "";
+		
+		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date data = new Date(timeData);
+		return dataFormatada.format(data);
+	}
+	
 	@Override
 	public String toString() {
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");

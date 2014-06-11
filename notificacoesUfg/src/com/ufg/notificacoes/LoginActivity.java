@@ -100,58 +100,60 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
-		if (mAuthTask != null) {
-			return;
-		}
-
-		// Reset errors.
-		mEmailView.setError(null);
-		mPasswordView.setError(null);
-
-		// Store values at the time of the login attempt.
-		mEmail = mEmailView.getText().toString();
-		mPassword = mPasswordView.getText().toString();
-
-		boolean cancel = false;
-		View focusView = null;
-
-		// Check for a valid password.
-		if (TextUtils.isEmpty(mPassword)) {
-			mPasswordView.setError(getString(R.string.error_field_required));
-			focusView = mPasswordView;
-			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
-		}
-
-		// Check for a valid email address.
-		if (TextUtils.isEmpty(mEmail)) {
-			mEmailView.setError(getString(R.string.error_field_required));
-			focusView = mEmailView;
-			cancel = true;
-		} else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
-			cancel = true;
-		}
-
-		if (cancel) {
-			// There was an error; don't attempt login and focus the first
-			// form field with an error.
-			focusView.requestFocus();
-		} else {
-			// Show a progress spinner, and kick off a background task to
-			// perform the user login attempt.
-			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-			showProgress(true);
-//			mAuthTask = new UserLoginTask();
-//			mAuthTask.execute((Void) null);
-			
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
-		}
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+//		if (mAuthTask != null) {
+//			return;
+//		}
+//
+//		// Reset errors.
+//		mEmailView.setError(null);
+//		mPasswordView.setError(null);
+//
+//		// Store values at the time of the login attempt.
+//		mEmail = mEmailView.getText().toString();
+//		mPassword = mPasswordView.getText().toString();
+//
+//		boolean cancel = false;
+//		View focusView = null;
+//
+//		// Check for a valid password.
+//		if (TextUtils.isEmpty(mPassword)) {
+//			mPasswordView.setError(getString(R.string.error_field_required));
+//			focusView = mPasswordView;
+//			cancel = true;
+//		} else if (mPassword.length() < 4) {
+//			mPasswordView.setError(getString(R.string.error_invalid_password));
+//			focusView = mPasswordView;
+//			cancel = true;
+//		}
+//
+//		// Check for a valid email address.
+//		if (TextUtils.isEmpty(mEmail)) {
+//			mEmailView.setError(getString(R.string.error_field_required));
+//			focusView = mEmailView;
+//			cancel = true;
+//		} else if (!mEmail.contains("@")) {
+//			mEmailView.setError(getString(R.string.error_invalid_email));
+//			focusView = mEmailView;
+//			cancel = true;
+//		}
+//
+//		if (cancel) {
+//			// There was an error; don't attempt login and focus the first
+//			// form field with an error.
+//			focusView.requestFocus();
+//		} else {
+//			// Show a progress spinner, and kick off a background task to
+//			// perform the user login attempt.
+//			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+//			showProgress(true);
+////			mAuthTask = new UserLoginTask();
+////			mAuthTask.execute((Void) null);
+//			
+//			Intent intent = new Intent(this, MainActivity.class);
+//			startActivity(intent);
+//		}
 	}
 
 	/**

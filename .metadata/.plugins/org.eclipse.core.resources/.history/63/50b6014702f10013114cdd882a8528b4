@@ -1,0 +1,45 @@
+package com.ufg.notificacoes.activity.adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.bean.Notificacao;
+
+public class NotificacaoListAdapter extends ArrayAdapter<String> {
+	private final Context context;
+	private final List<Notificacao> notificacoes;
+ 
+	public NotificacaoListAdapter(Context context, List<Notificacao> notificacoes) {
+		super(context, R.layout.lista_notificacoes, nomes);
+		this.context = context;
+		this.notificacoes = notificacoes;
+	}
+ 
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context
+			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+ 
+		View rowView = inflater.inflate(R.layout.lista_notificacoes, parent, false);
+		TextView textViewNome = (TextView) rowView.findViewById(R.id.nome);
+		TextView textViewTexto = (TextView) rowView.findViewById(R.id.texto);
+		TextView textViewData = (TextView) rowView.findViewById(R.id.data);
+		textViewNome.setText(nomesArray[position]);
+		textViewTexto.setText(textosArray[position]);
+		textViewData.setText(datasArray[position]);
+ 
+		// Change icon based on name
+		String s = nomesArray[position];
+ 
+		System.out.println(s);
+ 
+		return rowView;
+	}
+}

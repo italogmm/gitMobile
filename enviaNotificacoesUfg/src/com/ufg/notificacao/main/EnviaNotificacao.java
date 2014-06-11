@@ -7,8 +7,7 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 
 public class EnviaNotificacao {
-
-	private static final String ID_DISPOSITIVO_GCM = "APA91bHZwhlDcfimB_fHVbh0IVluJWQ4-F6c-pwKAR7UH_XMHaaJXhOuuImPV3QwUoS30c1wU8jnSrDcQ2kYlFuk9sz55YKCcv24jU21ShK8Pn_wy3SWiH-w7guQ8FpTlukuiFSKycIsMLkr7XPoHlflo-YIgjID8Q";
+	private static final String ID_DISPOSITIVO_GCM = "APA91bFixuCwWen-Y8YfSIduI_qH7qs-6YdSsUU5p6DytnnPaOJnGXqhIUGJjsVMmPENxehseSLABmRNouYsraqvnZBRHHziXE7udWovT_n9Z8awUGJR493DHFamJvCqHvKQlHPRUF-u7tpESKNcDp0ZpFbR6IJBqA";
 
 	private static final String API_KEY = "AIzaSyDAHjnlqy-2E_X8uAKt39sM8u29vdzK6eQ";
 
@@ -20,7 +19,7 @@ public class EnviaNotificacao {
 				.timeToLive(3)
 				.delayWhileIdle(true)
 				.addData("mensagem", // identificador da mensagem
-						"##MSGMETADATA:Edmundo Sergio##MSGMETADATA:Engenharia de Software##MSGMETADATA:Comunicado geral##MSGMETADATA: A universidade estar‡ fechada na pr—xima semana!")
+						"##MSGMETADATA:Edmundo Sergio##MSGMETADATA:Engenharia de Software##MSGMETADATA:Comunicado geral##MSGMETADATA: A universidade estarï¿½ fechada na prï¿½xima semana!")
 				.build();
 
 		Result result = null;
@@ -33,7 +32,7 @@ public class EnviaNotificacao {
 			e.printStackTrace();
 		}
 
-		// Imprime o resultado do envio na sa’da padr‹o
+		// Imprime o resultado do envio na saÃ­da padrÃ£o
 		if (result != null)
 			System.out.println(result.toString());
 	}
