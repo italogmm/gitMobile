@@ -10,8 +10,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
-import com.ufg.notificacoes.MainActivity;
 import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.activity.MainActivity;
 import com.ufg.notificacoes.bean.Notificacao;
 import com.ufg.notificacoes.dao.NotificacaoDao;
 
