@@ -1,0 +1,8 @@
+package com.ufg.notificacoes.bean;
+
+public class TipoRemetente {
+	
+	private Long id;
+	private String nome;
+	
+	}

@@ -1,27 +1,36 @@
 package com.ufg.notificacoes;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.TextView;
+
+import com.ufg.notificacoes.bean.Notificacao;
+import com.ufg.notificacoes.dao.NotificacaoDao;
 
 public class ConsultaNotificacao extends Activity {
-
+	
+	TextView txtViewRemetente;
+	TextView textViewCorpo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_consulta_notificacao);
-
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		
+		Bundle receiveBundle = this.getIntent().getExtras();
+		final long idNotificacao = receiveBundle.getLong("idNotificacao");
+		
+		NotificacaoDao notDAO = new NotificacaoDao(this);
+		Notificacao consultada = notDAO.consultar(idNotificacao);
+		
+		txtViewRemetente = (TextView)findViewById(R.id.remetente);
+		textViewCorpo = (TextView)findViewById(R.id.corpo);
+		
+		txtViewRemetente.setText(consultada.getRemetente());
+		textViewCorpo.setText(consultada.getTexto());
 	}
 
 	@Override
@@ -43,22 +52,4 @@ public class ConsultaNotificacao extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_consulta_notificacao, container, false);
-			return rootView;
-		}
-	}
-
 }

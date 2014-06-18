@@ -7,8 +7,8 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 
 public class EnviaNotificacao {
-	private static final String ID_DISPOSITIVO_GCM = "APA91bFixuCwWen-Y8YfSIduI_qH7qs-6YdSsUU5p6DytnnPaOJnGXqhIUGJjsVMmPENxehseSLABmRNouYsraqvnZBRHHziXE7udWovT_n9Z8awUGJR493DHFamJvCqHvKQlHPRUF-u7tpESKNcDp0ZpFbR6IJBqA";
-
+	
+	private static final String ID_DISPOSITIVO_GCM = "APA91bHUfzHZMKF7Dc146X_yifvRyQch9gB9-QvtkPZT3RyYQ_p6JF9DwVaOTkv9tn62kqwWnxvHHI-wOR_wydTTWYW366iaexKt4ajG58HkocE3IB5GE0PJ_NMwhl80_7pDtLPoYeCNsJUpuOhDCWjRqclY9aUMQQ";
 	private static final String API_KEY = "AIzaSyDAHjnlqy-2E_X8uAKt39sM8u29vdzK6eQ";
 
 	public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class EnviaNotificacao {
 				.timeToLive(3)
 				.delayWhileIdle(true)
 				.addData("mensagem", // identificador da mensagem
-						"##MSGMETADATA:Edmundo Sergio##MSGMETADATA:Engenharia de Software##MSGMETADATA:Comunicado geral##MSGMETADATA: A universidade estar� fechada na pr�xima semana!")
+						"Testando 12345678")
 				.build();
 
 		Result result = null;

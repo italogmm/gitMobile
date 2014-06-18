@@ -1,9 +1,9 @@
 package com.ufg.notificacoes;
 
-import java.util.Date;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,28 +42,33 @@ public class MainActivity extends ListActivity {
 		notificacoes = notificacaoDao.listar();
 		notificacaoDao.close();
 		
+		String[] ids = new String[1] ;
 		String[] remetentes = new String[1] ;
 		String[] textosNotificacoes = new String[1] ;
 		String[] datas = new String[1];
-		
-		notificacoes.add(new Notificacao("Eng de Software", "Não haverá aula hoje.", new Date()));
 		
 		for(int x = 0; x < notificacoes.size() && x < 15; x++){
 			remetentes[x] = notificacoes.get(x).getRemetente();
 			textosNotificacoes[x] = notificacoes.get(x).getTexto();
 			datas[x] = notificacoes.get(x).getDataFormatada();
+			ids[x] = notificacoes.get(x).getId().toString();
 		}
 		
 		if(notificacoes.size() > 0){
-			setListAdapter(new NotificacaoListAdapter(this, remetentes, textosNotificacoes, datas));
-			ListView listView = getListView();
+			setListAdapter(new NotificacaoListAdapter(this, remetentes, textosNotificacoes, datas, ids));
+			final ListView listView = getListView();
 			listView.setTextFilterEnabled(true);
 			listView.setOnItemClickListener(new OnItemClickListener(){
 	        @Override
 	        public void onItemClick(AdapterView<?> Parent, View view, int position,
 	                long id) {
-	        	Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_LONG).show();
-	        
+	        	
+	        	Intent intent = new Intent(MainActivity.this, ConsultaNotificacao.class);
+	        	Bundle sendBundle = new Bundle();
+	            sendBundle.putLong("idNotificacao", view.getId());
+	            intent.putExtras(sendBundle);
+	            
+	            MainActivity.this.startActivity(intent);
 	        }});
 		}
 	}

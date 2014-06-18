@@ -77,6 +77,32 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 		return lista;
 	}
 	
+	public Notificacao consultar(long id){
+		
+		String sql = "Select * from " + TABELA + " where id = " + id;
+		
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		
+		try{
+			while(cursor.moveToNext()){
+				Notificacao notificacao = new Notificacao();
+				
+				notificacao.setId(cursor.getLong(0));
+				notificacao.setRemetente(cursor.getString(1));
+				notificacao.setTexto(cursor.getString(2));
+				notificacao.setTimeData(cursor.getLong(3));
+				
+				return notificacao;
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		
+		return null;
+	}
+
 	public void cadastrar(Notificacao notificacao){
 		notificacao.setTimeData(new Date().getTime());
 		
