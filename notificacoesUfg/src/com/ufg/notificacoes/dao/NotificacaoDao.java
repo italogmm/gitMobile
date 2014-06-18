@@ -37,7 +37,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String ddl = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, remetente TEXT, texto TEXT, dataNotificacao NUMERIC)";
+		String ddl = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, remetente TEXT, texto TEXT, dataNotificacao NUMERIC, lida INTEGER)";
 		db.execSQL(ddl);
 	}
 
@@ -52,7 +52,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 		
 		List<Notificacao> lista = new ArrayList<Notificacao>();
 		
-		String sql = "SELECT id, remetente, texto, dataNotificacao FROM " + TABELA + " ORDER BY dataNotificacao ";
+		String sql = "SELECT id, remetente, texto, dataNotificacao, lida FROM " + TABELA + " ORDER BY dataNotificacao ";
 		
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		
@@ -64,6 +64,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 				notificacao.setRemetente(cursor.getString(1));
 				notificacao.setTexto(cursor.getString(2));
 				notificacao.setTimeData(cursor.getLong(3));
+				notificacao.setLida(cursor.getInt(4) == 1);
 				
 				lista.add(notificacao);
 			}
@@ -91,6 +92,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 				notificacao.setRemetente(cursor.getString(1));
 				notificacao.setTexto(cursor.getString(2));
 				notificacao.setTimeData(cursor.getLong(3));
+				notificacao.setLida(cursor.getInt(4) == 1);
 				
 				return notificacao;
 			}
@@ -111,9 +113,22 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 		values.put("remetente", notificacao.getRemetente());
 		values.put("texto", notificacao.getTexto());
 		values.put("dataNotificacao", notificacao.getTimeData());
+		values.put("lida", notificacao.getLida() != null && notificacao.getLida() ? 1 : 0);
+		
 		
 		getWritableDatabase().insert(TABELA, null, values);
 		Log.i(TAG, "NOTIFICACAO CADASTRADA!");
 	}
 	
+	public void alterar(Notificacao notificacao){
+		ContentValues values = new ContentValues();
+		
+		values.put("remetente", notificacao.getRemetente());
+		values.put("texto", notificacao.getTexto());
+		values.put("dataNotificacao", notificacao.getTimeData());
+		values.put("lida", notificacao.getLida() != null && notificacao.getLida() ? 1 : 0);
+		
+		getWritableDatabase().update(TABELA, values, " id = " + notificacao.getId(), null);
+		Log.i(TAG, "NOTIFICACAO CADASTRADA!");
+	}
 }

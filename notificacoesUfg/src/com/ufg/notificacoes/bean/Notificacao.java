@@ -9,9 +9,10 @@ public class Notificacao {
 	private String remetente;
 	private Long timeData;
 	private String texto;
+	private Boolean lida;
 	
 	public Notificacao(){}
-	
+
 	public Notificacao(String texto){
 		this.texto = texto;
 	}
@@ -21,10 +22,11 @@ public class Notificacao {
 		this.remetente = remetente;
 	}
 	
-	public Notificacao(String remetente, String texto, Date data){
+	public Notificacao(String remetente, String texto, Date data, Boolean lida){
 		this.texto = texto;
 		this.remetente = remetente;
 		this.timeData = data.getTime();
+		this.lida = lida;
 	}
 	
 	public Long getId() {
@@ -50,6 +52,12 @@ public class Notificacao {
 	}
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+	public Boolean getLida() {
+		return lida;
+	}
+	public void setLida(Boolean lida) {
+		this.lida = lida;
 	}
 	public String getDataFormatada(){
 		if(timeData == null)

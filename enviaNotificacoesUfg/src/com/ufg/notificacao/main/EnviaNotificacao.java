@@ -19,7 +19,7 @@ public class EnviaNotificacao {
 				.timeToLive(3)
 				.delayWhileIdle(true)
 				.addData("mensagem", // identificador da mensagem
-						"Testando 12345678")
+						"Testando de novo!! 12345678")
 				.build();
 
 		Result result = null;

@@ -42,20 +42,22 @@ public class MainActivity extends ListActivity {
 		notificacoes = notificacaoDao.listar();
 		notificacaoDao.close();
 		
-		String[] ids = new String[1] ;
-		String[] remetentes = new String[1] ;
-		String[] textosNotificacoes = new String[1] ;
-		String[] datas = new String[1];
+		String[] ids = new String[notificacoes.size()] ;
+		String[] remetentes = new String[notificacoes.size()] ;
+		String[] textosNotificacoes = new String[notificacoes.size()] ;
+		String[] datas = new String[notificacoes.size()];
+		Boolean[] lida = new Boolean[notificacoes.size()];
 		
 		for(int x = 0; x < notificacoes.size() && x < 15; x++){
 			remetentes[x] = notificacoes.get(x).getRemetente();
 			textosNotificacoes[x] = notificacoes.get(x).getTexto();
 			datas[x] = notificacoes.get(x).getDataFormatada();
 			ids[x] = notificacoes.get(x).getId().toString();
+			lida[x] = notificacoes.get(x).getLida();
 		}
 		
 		if(notificacoes.size() > 0){
-			setListAdapter(new NotificacaoListAdapter(this, remetentes, textosNotificacoes, datas, ids));
+			setListAdapter(new NotificacaoListAdapter(this, remetentes, textosNotificacoes, datas, ids, lida));
 			final ListView listView = getListView();
 			listView.setTextFilterEnabled(true);
 			listView.setOnItemClickListener(new OnItemClickListener(){

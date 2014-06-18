@@ -31,6 +31,9 @@ public class ConsultaNotificacao extends Activity {
 		
 		txtViewRemetente.setText(consultada.getRemetente());
 		textViewCorpo.setText(consultada.getTexto());
+		
+		consultada.setLida(true);
+		notDAO.alterar(consultada);
 	}
 
 	@Override

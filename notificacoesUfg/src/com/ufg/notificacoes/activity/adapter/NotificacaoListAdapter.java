@@ -1,6 +1,7 @@
 package com.ufg.notificacoes.activity.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,16 @@ public class NotificacaoListAdapter extends ArrayAdapter<String> {
 	private final String[] nomesArray;
 	private final String[] textosArray;
 	private final String[] datasArray;
+	private final Boolean[] lidaArray;
  
-	public NotificacaoListAdapter(Context context, String[] remetentes, String[] textosNotificacoes, String[] datas, String[] idsArray) {
+	public NotificacaoListAdapter(Context context, String[] remetentes, String[] textosNotificacoes, String[] datas, String[] idsArray, Boolean[] lidaArray) {
 		super(context, R.layout.lista_notificacoes, remetentes);
 		this.context = context;
 		this.nomesArray = remetentes;
 		this.textosArray = textosNotificacoes;
 		this.datasArray = datas;
 		this.idsArray = idsArray;
+		this.lidaArray = lidaArray;
 	}
  
 	@Override
@@ -49,6 +52,12 @@ public class NotificacaoListAdapter extends ArrayAdapter<String> {
 		System.out.println(s);
 		
 		rowView.setId(Long.valueOf(idsArray[position]).intValue());
+		
+		if(!lidaArray[position]){
+			textViewRemetente.setTypeface(null, Typeface.BOLD);
+			textViewTexto.setTypeface(null, Typeface.BOLD);
+			textViewData.setTypeface(null, Typeface.BOLD);
+		}
 		
 		return rowView;
 	}
