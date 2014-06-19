@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.bean.GrupoEnvio;
+import com.ufg.notificacoes.dao.GrupoEnvioDao;
 
 public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
 	
@@ -15,6 +19,7 @@ public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
 	private final String[] idsGruposEnvio;
 	private final String[] nomesGruposEnvio;
 	private final Boolean[] recebimentoAtivado;
+	private GrupoEnvioDao grupoEnvioDao;
 	
 	public ConfiguracaoRecebimentoListAdapter(Context context, String[] nomesGruposEnvio, String[] idsGruposEnvio, Boolean[] recebimentoAtivado) {
 		super(context, R.layout.lista_configuracao_envio, nomesGruposEnvio);
@@ -22,6 +27,7 @@ public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
 		this.idsGruposEnvio = idsGruposEnvio;
 		this.nomesGruposEnvio = nomesGruposEnvio;
 		this.recebimentoAtivado = recebimentoAtivado;
+		this.grupoEnvioDao = new GrupoEnvioDao(context);
 	}
 	
 	@Override
@@ -37,6 +43,14 @@ public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
 		CheckBox checkBoxGrupoEnvio = (CheckBox) rowView.findViewById(R.id.grupo_envio);
 		checkBoxGrupoEnvio.setText(nomesGruposEnvio[position]);
 		checkBoxGrupoEnvio.setChecked(recebimentoAtivado[position]);
+		checkBoxGrupoEnvio.setId(Integer.valueOf(idsGruposEnvio[position]));
+		checkBoxGrupoEnvio.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+		    	GrupoEnvio grupoEnvio = grupoEnvioDao.consultar(buttonView.getId());
+		    	grupoEnvio.setRecebimentoAtivado(isChecked);
+		    	grupoEnvioDao.alterar(grupoEnvio);
+		    }
+		});
 		String s = nomesGruposEnvio[position];
 		
 		System.out.println(s);

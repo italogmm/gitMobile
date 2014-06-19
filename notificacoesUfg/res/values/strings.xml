@@ -4,6 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_config">Configurações</string>
     <string name="action_settings">Configurações</string>
+    <string name="action_configurar_recebimento">Configurar recebimento</string>
     <string name="action_entrar">Entrar</string>
     <string name="title_activity_inicio">Inicio</string>
     <string name="title_activity_consulta_notificacao">ConsultaNotificacao</string>

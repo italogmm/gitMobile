@@ -125,4 +125,20 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 		
 		return consultar(id);
 	}
+	
+	public GrupoEnvio alterar(GrupoEnvio grupoEnvio){
+		
+		ContentValues values = new ContentValues();
+		
+		values.put("nome", grupoEnvio.getNome());
+		values.put("codigo", grupoEnvio.getNome());
+		values.put("recebimentoAtivado", grupoEnvio.getRecebimentoAtivado() != null && 
+				grupoEnvio.getRecebimentoAtivado() ? 1 : 0);
+		
+		long id = getWritableDatabase().update(TABELA,values, " id = " + grupoEnvio.getId(), null);
+		
+		Log.i(TAG, "GRUPO DE ENVIO ALTERADO!");
+		
+		return consultar(id);
+	}
 }

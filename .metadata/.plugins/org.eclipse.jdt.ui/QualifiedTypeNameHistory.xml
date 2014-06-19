@@ -15,7 +15,12 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.bean.Notificacao"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.dao.NotificacaoDao"/>
-<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.GrupoEnvioDao"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.bean.GrupoEnvio"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.GrupoEnvioDao"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.activity.adapter.ConfiguracaoRecebimentoListAdapter"/>
+<fullyQualifiedTypeName name="android.view.MenuItem.OnMenuItemClickListener"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.activity.ConfiguracoesActivity"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.R.id"/>
+<fullyQualifiedTypeName name="android.widget.CheckBox"/>
 </qualifiedTypeNameHistroy>
