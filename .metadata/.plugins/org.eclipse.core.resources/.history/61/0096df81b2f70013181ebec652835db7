@@ -1,0 +1,19 @@
+package com.ufg.notificacoes.activity.adapter;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+import com.ufg.notificacoes.R;
+
+public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
+	
+	private final Context context;
+	private final String[] idsGruposEnvio;
+	private final String[] nomesGruposEnvio;
+	
+	public NotificacaoListAdapter(Context context, String[] nomesGruposEnvio, String[] idsGruposEnvio) {
+		super(context, R.layout.lista_configuracao_envio, nomesGruposEnvio);
+		this.context = context;
+	}
+
+}

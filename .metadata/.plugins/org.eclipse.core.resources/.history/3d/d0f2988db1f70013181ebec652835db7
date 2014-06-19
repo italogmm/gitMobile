@@ -1,0 +1,7 @@
+package com.ufg.notificacoes.activity;
+
+import android.app.ListActivity;
+
+public class ConfiguracoesActivity  extends ListActivity {
+
+}

@@ -1,0 +1,16 @@
+package com.ufg.notificacoes.activity;
+
+import com.ufg.notificacoes.util.GoogleCloudMessaging;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+
+public class ConfiguracoesActivity extends ListActivity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		GoogleCloudMessaging.ativa(getApplicationContext());
+	}
+
+}

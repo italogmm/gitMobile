@@ -1,0 +1,13 @@
+package com.ufg.notificacoes.activity;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+
+public class ConfiguracoesActivity extends ListActivity {
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+	}
+	}

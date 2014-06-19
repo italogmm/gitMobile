@@ -1,0 +1,7 @@
+package com.ufg.notificacoes.activity.adapter;
+
+import android.widget.ArrayAdapter;
+
+public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
+
+}

@@ -6,11 +6,14 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.activity.adapter.NotificacaoListAdapter;
 import com.ufg.notificacoes.bean.GrupoEnvio;
 import com.ufg.notificacoes.bean.Notificacao;
@@ -39,6 +42,25 @@ public class MainActivity extends ListActivity {
 		GoogleCloudMessaging.ativa(getApplicationContext());
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		 switch (item.getItemId()) {
+		 case R.id.action_config:
+			 Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
+	         MainActivity.this.startActivity(intent);
+		 default:
+		      return super.onOptionsItemSelected(item);
+		 }
+	}
 	private void carregarLista(){
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
 		notificacoes = notificacaoDao.listar();

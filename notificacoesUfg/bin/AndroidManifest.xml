@@ -69,6 +69,11 @@
             android:name="com.ufg.notificacoes.activity.VisualizaNotificacaoActivity"
             android:label="@string/title_activity_consulta_notificacao" >
         </activity>
+        
+        <activity
+            android:name="com.ufg.notificacoes.activity.ConfiguracoesActivity"
+            android:label="@string/title_activity_configuracoes_recebimento" >
+        </activity>
     </application>
 
 </manifest>

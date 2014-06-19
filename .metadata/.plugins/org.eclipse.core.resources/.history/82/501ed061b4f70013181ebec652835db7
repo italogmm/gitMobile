@@ -1,0 +1,41 @@
+package com.ufg.notificacoes.activity;
+
+import java.util.List;
+
+import com.ufg.notificacoes.bean.Notificacao;
+import com.ufg.notificacoes.dao.GrupoEnvioDao;
+import com.ufg.notificacoes.dao.NotificacaoDao;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+
+public class ConfiguracoesActivity extends ListActivity {
+	
+	private static boolean primeiraExecucao = true;
+	
+	private List<GrupoEnvio> notificacoes;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+	}
+	
+	@Override
+	protected void onPause(){
+		super.onPause();
+		
+		if(!primeiraExecucao){
+			primeiraExecucao = false;
+			finish();
+		}
+	}
+	
+	private void carregarGruposEnvio(){
+		
+		GrupoEnvioDao grupoEnvioDao = new GrupoEnvioDao(this);
+		notificacoes = notificacaoDao.listar();
+		notificacaoDao.close();
+		
+	}
+}
