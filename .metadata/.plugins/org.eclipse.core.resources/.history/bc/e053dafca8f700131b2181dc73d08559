@@ -1,7 +1,6 @@
 package com.ufg.notificacoes.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,8 +28,8 @@ public class VisualizaNotificacaoActivity extends Activity {
 		Bundle receiveBundle = this.getIntent().getExtras();
 		idNotificacao = receiveBundle.getLong("idNotificacao");
 		
-		final NotificacaoDao notDAO = new NotificacaoDao(this);
-		final Notificacao consultada = notDAO.consultar(idNotificacao);
+		NotificacaoDao notDAO = new NotificacaoDao(this);
+		Notificacao consultada = notDAO.consultar(idNotificacao);
 		
 		txtViewRemetente = (TextView)findViewById(R.id.remetente);
 		textViewCorpo = (TextView)findViewById(R.id.corpo);
@@ -41,23 +40,16 @@ public class VisualizaNotificacaoActivity extends Activity {
 		consultada.setLida(true);
 		notDAO.alterar(consultada);
 		
+		marcarComoNaoLida = (Button)findViewById(R.id.marcarComoNaoLidaBtn);
+		
 		findViewById(R.id.marcarComoNaoLidaBtn).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						consultada.setLida(false);
-						notDAO.alterar(consultada);
-						Intent intent = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
-						startActivity(intent);
 					}
 				});
 	}
 
-	@Override
-	protected void onPause(){
-		super.onPause();
-		finish();
-	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

@@ -47,17 +47,13 @@ public class VisualizaNotificacaoActivity extends Activity {
 					public void onClick(View view) {
 						consultada.setLida(false);
 						notDAO.alterar(consultada);
-						Intent intent = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
+						Intent intent = new Intent();
+						intent.setClassName(this, MainActivity.class.getName());
 						startActivity(intent);
 					}
 				});
 	}
 
-	@Override
-	protected void onPause(){
-		super.onPause();
-		finish();
-	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
