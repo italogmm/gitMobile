@@ -11,7 +11,10 @@
 <fullyQualifiedTypeName name="java.lang.AssertionError"/>
 <fullyQualifiedTypeName name="junit.framework.Assert"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.R"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.dao.NotificacaoDao"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.util.Util"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.bean.GrupoEnvio"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.bean.Notificacao"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.GrupoEnvioDao"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,17 @@
+package com.ufg.notificacoes.util;
+
+import java.security.MessageDigest;
+
+public class Util {
+	
+	public String criptografaSenha(String senha){
+		try{
+		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+		byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		
+	}
+
+}

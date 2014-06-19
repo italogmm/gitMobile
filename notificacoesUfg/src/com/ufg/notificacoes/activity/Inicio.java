@@ -1,12 +1,6 @@
 package com.ufg.notificacoes.activity;
 
-import com.ufg.notificacoes.R;
-import com.ufg.notificacoes.R.id;
-import com.ufg.notificacoes.R.layout;
-import com.ufg.notificacoes.R.menu;
-
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+
+import com.ufg.notificacoes.R;
 
 public class Inicio extends Activity {
 

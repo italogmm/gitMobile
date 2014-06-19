@@ -1,0 +1,7 @@
+package com.ufg.notificacoes.util;
+
+public class Util {
+	
+	public String criptografaSenha
+
+}

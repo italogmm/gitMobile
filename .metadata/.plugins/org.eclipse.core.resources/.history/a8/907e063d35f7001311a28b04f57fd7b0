@@ -1,0 +1,41 @@
+package com.ufg.notificacoes.test;
+
+import java.util.Date;
+
+import com.ufg.notificacoes.bean.GrupoEnvio;
+import com.ufg.notificacoes.bean.Notificacao;
+import com.ufg.notificacoes.bean.Usuario;
+import com.ufg.notificacoes.util.Util;
+
+public class DataGeneratorForTests {
+	
+	public void incluirDadosParaTeste() throws Exception{
+		
+		Usuario usuario = new Usuario();
+		usuario.setNome("Italo Gustavo");
+		usuario.setMatricula("092492");
+		usuario.setSenha(Util.criptografaSenha("123456"));
+		usuario.setEmail("italogmm@gmail.com");
+		
+		GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
+		grupoEnvioUFG.setNome("UFG");
+		grupoEnvioUFG.setReceberNotificacoes(true);
+		
+		GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
+		grupoEnvioEngSoftware.setNome("Engenharia de Software");
+		grupoEnvioEngSoftware.setReceberNotificacoes(true);
+		
+		Notificacao notificacao1 = new Notificacao();
+		notificacao1.setLida(false);
+		notificacao1.setTexto("Hoje não haverá aula da disciplina, estará disponível "
+				+ "no moodle uma ativiade válida como presença.");
+		notificacao1.setGrupoEnvio(grupoEnvioEngSoftware);
+		notificacao1.setTimeData(new Date().getTime());
+		
+		Notificacao notificacao2 = new Notificacao();
+		notificacao2.setLida(false);
+		notificacao2.setTexto("A universidade está em greve nos próximos dias, portanto, "
+				+ "até qualquer outro aviso as aulas estão suspensas.");
+		notificacao2.setGrupoEnvio(grupoEnvioUFG);
+	}
+}

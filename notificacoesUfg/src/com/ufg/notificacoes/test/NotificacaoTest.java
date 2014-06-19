@@ -10,8 +10,9 @@ import com.ufg.notificacoes.dao.NotificacaoDao;
 public class NotificacaoTest extends AndroidTestCase {
 	
 	public void incluirNotificacao() throws Exception{
+		
 		Notificacao notificacao = new Notificacao();
-		notificacao.setRemetente("UFG");
+//		notificacao.setRemetente("UFG");
 		notificacao.setTexto("A UFG estará fechada do dia 2 ao dia 10 de agosto.");
 		notificacao.setTimeData(new Date().getTime());
 		

@@ -6,7 +6,7 @@ import java.util.Date;
 public class Notificacao {
 	
 	private Long id;
-	private String remetente;
+	private GrupoEnvio grupoEnvio;
 	private Long timeData;
 	private String texto;
 	private Boolean lida;
@@ -19,12 +19,10 @@ public class Notificacao {
 	
 	public Notificacao(String remetente, String texto){
 		this.texto = texto;
-		this.remetente = remetente;
 	}
 	
 	public Notificacao(String remetente, String texto, Date data, Boolean lida){
 		this.texto = texto;
-		this.remetente = remetente;
 		this.timeData = data.getTime();
 		this.lida = lida;
 	}
@@ -34,12 +32,6 @@ public class Notificacao {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public String getRemetente() {
-		return remetente;
-	}
-	public void setRemetente(String remetente) {
-		this.remetente = remetente;
 	}
 	public Long getTimeData() {
 		return timeData;
@@ -67,13 +59,10 @@ public class Notificacao {
 		Date data = new Date(timeData);
 		return dataFormatada.format(data);
 	}
-	
-	@Override
-	public String toString() {
-		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Date data = new Date(timeData);
-		
-		return texto + " - De: " + remetente + " - Em: " + dataFormatada.format(data);
+	public GrupoEnvio getGrupoEnvio() {
+		return grupoEnvio;
 	}
-
+	public void setGrupoEnvio(GrupoEnvio grupoEnvio) {
+		this.grupoEnvio = grupoEnvio;
+	}
 }

@@ -16,11 +16,16 @@ import com.ufg.notificacoes.bean.Usuario;
 
 public class UsuarioDao extends SQLiteOpenHelper{
 
-	private static final int VERSAO = 1;
+	private static final int VERSAO = 5;
 	private static final String TABELA = "Usuario";
 	private static final String DATABASE = "NotificacoesUFG";
 	
 	private static final String TAG = "CADASTRO_USUARIOS";
+	public static final String ddlCreate = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, "
+			+ "nome TEXT, "
+			+ "email TEXT, "
+			+ "matricula TEXT, "
+			+ "senha TEXT)";
 	
 	public UsuarioDao(){
 		super(null, DATABASE, null, VERSAO);
@@ -36,12 +41,10 @@ public class UsuarioDao extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String ddl = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, "
-				+ "nome TEXT, "
-				+ "email TEXT, "
-				+ "matricula TEXT, "
-				+ "senha TEXT)";
-		db.execSQL(ddl);
+		NotificacaoDao notificacaoDao = new NotificacaoDao();
+		notificacaoDao.onCreate(db);
+		
+		Log.i(TAG, "CRIANDO TABELA DE USUARIO");
 	}
 
 	@Override
@@ -81,7 +84,34 @@ public class UsuarioDao extends SQLiteOpenHelper{
 		return lista;
 	}
 	
-	public void cadastrar(Usuario usuario){
+	public Usuario consultar(long id){
+
+		String sql = "SELECT id, nome, email, matricula, senha FROM " + TABELA + " where id = " + id;
+		
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		
+		try{
+			while(cursor.moveToNext()){
+				Usuario usuario = new Usuario();
+				
+				usuario.setId(cursor.getLong(0));
+				usuario.setNome(cursor.getString(1));
+				usuario.setEmail(cursor.getString(2));
+				usuario.setMatricula(cursor.getString(3));
+				usuario.setSenha(cursor.getString(4));
+				
+				return usuario;
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		
+		return null;
+	}
+	
+	public Usuario cadastrar(Usuario usuario){
 		
 		ContentValues values = new ContentValues();
 		
@@ -90,7 +120,9 @@ public class UsuarioDao extends SQLiteOpenHelper{
 		values.put("matricula", usuario.getMatricula());
 		values.put("senha", usuario.getSenha());
 		
-		getWritableDatabase().insert(TABELA, null, values);
+		long id = getWritableDatabase().insert(TABELA, null, values);
 		Log.i(TAG, "USUARIO CADASTRADA!");
+		
+		return consultar(id);
 	}
 }

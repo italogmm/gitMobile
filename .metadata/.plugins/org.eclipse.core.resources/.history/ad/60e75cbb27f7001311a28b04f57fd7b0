@@ -1,0 +1,25 @@
+package com.ufg.notificacoes.test;
+
+import com.ufg.notificacoes.bean.GrupoEnvio;
+import com.ufg.notificacoes.bean.Usuario;
+import com.ufg.notificacoes.util.Util;
+
+public class DataGeneratorForTests {
+	
+	public void incluirDadosParaTeste() throws Exception{
+		
+		Usuario usuario = new Usuario();
+		usuario.setNome("Italo Gustavo");
+		usuario.setMatricula("092492");
+		usuario.setSenha(Util.criptografaSenha("123456"));
+		usuario.setEmail("italogmm@gmail.com");
+		
+		GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
+		grupoEnvioUFG.setNome("UFG");
+		grupoEnvioUFG.setReceberNotificacoes(true);
+		
+		GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
+		grupoEnvioEngSoftware.setNome("UFG");
+		grupoEnvioEngSoftware.setReceberNotificacoes(true);
+	}
+}
