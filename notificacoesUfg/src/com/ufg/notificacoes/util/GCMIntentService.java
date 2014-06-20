@@ -6,19 +6,27 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
 import com.ufg.notificacoes.R;
-import com.ufg.notificacoes.activity.MainActivity;
+import com.ufg.notificacoes.activity.VisualizaNotificacaoActivity;
+import com.ufg.notificacoes.bean.GrupoEnvio;
 import com.ufg.notificacoes.bean.Notificacao;
+import com.ufg.notificacoes.dao.GrupoEnvioDao;
 import com.ufg.notificacoes.dao.NotificacaoDao;
 
 public class GCMIntentService extends GCMBaseIntentService {
+		
+	GrupoEnvioDao grupoEnvioDao;
+	NotificacaoDao notDao;
 	
 	public GCMIntentService() {
         super(Constantes.SENDER_ID);
+        this.grupoEnvioDao = new GrupoEnvioDao(this);
+        this.notDao = new NotificacaoDao();
     }
 	
 	@Override
@@ -43,16 +51,31 @@ public class GCMIntentService extends GCMBaseIntentService {
 		
 		String mensagem = intent.getExtras().getString("mensagem");
 		Log.i(Constantes.TAG, "Mensagem recebida: " + mensagem);
-
-		if (mensagem != null && !"".equals(mensagem)){
-			NotificacaoDao notDao = new NotificacaoDao(context);
-			notDao.cadastrar(new Notificacao("Remetente teste", mensagem));
+		
+		if(validaMensagem(mensagem)){
+			String grupoEnvio = mensagem.substring(7, mensagem.indexOf("#MSG:"));
+			String msg = mensagem.substring(mensagem.indexOf("#MSG:") + 5, mensagem.length());
 			
-			mostraNotificacao("Novo aviso da UFG!", mensagem, context);
+			GrupoEnvio grpEnvio = grupoEnvioDao.consultarPorCodigo(grupoEnvio);
+			
+			if(grpEnvio != null && grpEnvio.getRecebimentoAtivado() != null && grpEnvio.getRecebimentoAtivado()){
+				NotificacaoDao notDao = new NotificacaoDao(context);
+				Notificacao notificacao = notDao.cadastrar(new Notificacao(grpEnvio, msg));
+				
+				mostraNotificacao("Novo aviso da UFG!", msg, context, notificacao.getId());
+			}
 		}
 	}
 	
-	public void mostraNotificacao(String titulo, String mensagem, Context context) {
+	public boolean validaMensagem(String mensagem){
+		if(mensagem == null || mensagem.length() < 14 || mensagem.indexOf("#GRUPO:") == -1 || mensagem.indexOf("#MSG:") == -1){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void mostraNotificacao(String titulo, String mensagem, Context context, Long notificacaoId) {
 
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(context)
@@ -60,11 +83,15 @@ public class GCMIntentService extends GCMBaseIntentService {
 		        .setContentTitle(titulo)
 		        .setContentText(mensagem);
 		
-		Intent resultIntent = new Intent(context, MainActivity.class);
+		Intent resultIntent = new Intent(context, VisualizaNotificacaoActivity.class);
 		resultIntent.putExtra("mensagem_recebida", mensagem);
 		
+		Bundle sendBundle = new Bundle();
+        sendBundle.putLong("idNotificacao", notificacaoId);
+        resultIntent.putExtras(sendBundle);
+        
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-		stackBuilder.addParentStack(MainActivity.class);
+		stackBuilder.addParentStack(VisualizaNotificacaoActivity.class);
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent =
 		        stackBuilder.getPendingIntent(

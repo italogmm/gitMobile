@@ -45,7 +45,6 @@ public class MainActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -102,6 +101,7 @@ public class MainActivity extends ListActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
+		System.out.println("ON RESUME");
 		carregarLista();
 	}
 	
@@ -116,12 +116,11 @@ public class MainActivity extends ListActivity {
 	}
 
 	public void incluirDadosParaTeste() throws Exception {
-
 		UsuarioDao usuarioDao = new UsuarioDao(this);
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
 		GrupoEnvioDao grupoEnvioDao = new GrupoEnvioDao(this);
 		
-		if(grupoEnvioDao.listar().size() == 0){
+		if(usuarioDao.listar().size() == 0){
 			Usuario usuario = new Usuario();
 			usuario.setNome("Italo Gustavo");
 			usuario.setMatricula("092492");
@@ -130,13 +129,15 @@ public class MainActivity extends ListActivity {
 			usuario = usuarioDao.cadastrar(usuario);
 	
 			GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
-			grupoEnvioUFG.setNome("UFG");
+			grupoEnvioUFG.setNome("Universidade Federal de Goiás");
 			grupoEnvioUFG.setRecebimentoAtivado(true);
+			grupoEnvioUFG.setCodigo(0l);
 			grupoEnvioUFG = grupoEnvioDao.cadastrar(grupoEnvioUFG);
 			
 			GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
 			grupoEnvioEngSoftware.setNome("Engenharia de Software");
 			grupoEnvioEngSoftware.setRecebimentoAtivado(true);
+			grupoEnvioEngSoftware.setCodigo(5277l);
 			grupoEnvioEngSoftware = grupoEnvioDao.cadastrar(grupoEnvioEngSoftware);
 			
 			Notificacao notificacao1 = new Notificacao();

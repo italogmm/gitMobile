@@ -4,7 +4,7 @@ public class GrupoEnvio {
 	
 	private Long id;
 	private String nome;
-	private String codigo;
+	private Long codigo;
 	private Boolean recebimentoAtivado;
 	
 	public GrupoEnvio(){}
@@ -13,7 +13,7 @@ public class GrupoEnvio {
 		this.id = id;
 	}
 	
-	public GrupoEnvio(Long id, String nome, String codigo, Boolean recebimentoAtivado){
+	public GrupoEnvio(Long id, String nome, Long codigo, Boolean recebimentoAtivado){
 		this.id = id;
 		this.nome = nome;
 		this.codigo = codigo;
@@ -32,18 +32,16 @@ public class GrupoEnvio {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
 	public Boolean getRecebimentoAtivado() {
 		return recebimentoAtivado;
 	}
-
 	public void setRecebimentoAtivado(Boolean recebimentoAtivado) {
 		this.recebimentoAtivado = recebimentoAtivado;
+	}
+	public Long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 }

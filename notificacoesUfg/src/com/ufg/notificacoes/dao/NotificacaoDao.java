@@ -71,7 +71,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 				notificacao.setTexto(cursor.getString(1));
 				notificacao.setTimeData(cursor.getLong(2));
 				notificacao.setLida(cursor.getInt(3) == 1);
-				notificacao.setGrupoEnvio(new GrupoEnvio(cursor.getLong(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7) == 1));
+				notificacao.setGrupoEnvio(new GrupoEnvio(cursor.getLong(4), cursor.getString(5), cursor.getLong(6), cursor.getInt(7) == 1));
 				
 				lista.add(notificacao);
 			}
@@ -102,7 +102,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 				notificacao.setTexto(cursor.getString(1));
 				notificacao.setTimeData(cursor.getLong(2));
 				notificacao.setLida(cursor.getInt(3) == 1);
-				notificacao.setGrupoEnvio(new GrupoEnvio(cursor.getLong(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7) == 1));
+				notificacao.setGrupoEnvio(new GrupoEnvio(cursor.getLong(4), cursor.getString(5), cursor.getLong(6), cursor.getInt(7) == 1));
 				
 				return notificacao;
 			}

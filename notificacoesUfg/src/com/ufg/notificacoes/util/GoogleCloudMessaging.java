@@ -15,15 +15,15 @@ public class GoogleCloudMessaging {
 		if (regId.equals("")) {
 			GCMRegistrar.register(context, Constantes.SENDER_ID);
 			String id = GCMRegistrar.getRegistrationId(context);
-			Log.i(Constantes.TAG, "Serviço GoogleCloudMessaging ativado. ID " + id);
+			Log.i(Constantes.TAG, "Servi√ßo GoogleCloudMessaging ativado. ID " + id);
 		} else {
-			Log.i(Constantes.TAG, "O serviço GoogleCloudMessaging já está ativo. ID: " + regId);
+			Log.i(Constantes.TAG, "O servi√ßo GoogleCloudMessaging j√° est√° ativo. ID: " + regId);
 		}
 	}
 
 	public static void desativa(Context context) {
 		GCMRegistrar.unregister(context);
-		Log.i(Constantes.TAG, "Serviço GoogleCloudMessaging desativado.");
+		Log.i(Constantes.TAG, "Servi√ßo GoogleCloudMessaging desativado.");
 	}
 
 	public static boolean isAtivo(Context context) {

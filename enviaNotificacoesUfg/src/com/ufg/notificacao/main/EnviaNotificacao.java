@@ -13,13 +13,17 @@ public class EnviaNotificacao {
 
 	public static void main(String[] args) {
 		
+		String mensagemTeste = "#GRUPO:5277#MSG:Hoje não haverá aula de novo!!!!!!! Será??";
+		System.out.println(mensagemTeste.substring(7, mensagemTeste.indexOf("#MSG:")));
+		System.out.println(mensagemTeste.substring(mensagemTeste.indexOf("#MSG:") + 5, mensagemTeste.length()));
+		
 		Sender sender = new Sender(API_KEY);
 		Message message = new Message.Builder()
 				.collapseKey("1")
 				.timeToLive(3)
 				.delayWhileIdle(true)
 				.addData("mensagem", // identificador da mensagem
-						"Testando de novo!! 12345678")
+						mensagemTeste)
 				.build();
 
 		Result result = null;

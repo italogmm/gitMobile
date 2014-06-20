@@ -21,6 +21,11 @@ public class Notificacao {
 		this.texto = texto;
 	}
 	
+	public Notificacao(GrupoEnvio grupoEnvio, String texto){
+		this.texto = texto;
+		this.grupoEnvio = grupoEnvio;
+	}
+	
 	public Notificacao(String remetente, String texto, Date data, Boolean lida){
 		this.texto = texto;
 		this.timeData = data.getTime();

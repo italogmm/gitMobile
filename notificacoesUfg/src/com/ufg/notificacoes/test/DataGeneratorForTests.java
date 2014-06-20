@@ -28,13 +28,15 @@ public class DataGeneratorForTests extends AndroidTestCase {
 		usuario = usuarioDao.cadastrar(usuario);
 
 		GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
-		grupoEnvioUFG.setNome("UFG");
+		grupoEnvioUFG.setNome("Universidade Federal de Goiás");
 		grupoEnvioUFG.setRecebimentoAtivado(true);
+		grupoEnvioUFG.setCodigo(0l);
 		grupoEnvioUFG = grupoEnvioDao.cadastrar(grupoEnvioUFG);
 		
 		GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
 		grupoEnvioEngSoftware.setNome("Engenharia de Software");
 		grupoEnvioEngSoftware.setRecebimentoAtivado(true);
+		grupoEnvioEngSoftware.setCodigo(5277l);
 		grupoEnvioEngSoftware = grupoEnvioDao.cadastrar(grupoEnvioEngSoftware);
 		
 		Notificacao notificacao1 = new Notificacao();

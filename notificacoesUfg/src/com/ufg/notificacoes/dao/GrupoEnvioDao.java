@@ -24,7 +24,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 	public static final String ddlCreate = "CREATE TABLE " + TABELA + "( "
 			+ "id INTEGER PRIMARY KEY, "
 			+ "nome TEXT, "
-			+ "codigo TEXT, "
+			+ "codigo INTEGER, "
 			+ "recebimentoAtivado INTEGER)";
 	
 	public GrupoEnvioDao(){
@@ -69,7 +69,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 				
 				grupoEnvio.setId(cursor.getLong(0));
 				grupoEnvio.setNome(cursor.getString(1));
-				grupoEnvio.setCodigo(cursor.getString(2));
+				grupoEnvio.setCodigo(cursor.getLong(2));
 				grupoEnvio.setRecebimentoAtivado(cursor.getInt(3) == 1);
 				
 				lista.add(grupoEnvio);
@@ -96,7 +96,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 				
 				grupoEnvio.setId(cursor.getLong(0));
 				grupoEnvio.setNome(cursor.getString(1));
-				grupoEnvio.setCodigo(cursor.getString(2));
+				grupoEnvio.setCodigo(cursor.getLong(2));
 				grupoEnvio.setRecebimentoAtivado(cursor.getInt(3) == 1);
 				
 				return grupoEnvio;
@@ -110,12 +110,38 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 		return null;
 	}
 
+	public GrupoEnvio consultarPorCodigo(String codigo){
+
+		String sql = "Select * from " + TABELA + " where codigo = " + codigo;
+		
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		
+		try{
+			while(cursor.moveToNext()){
+				GrupoEnvio grupoEnvio = new GrupoEnvio();
+				
+				grupoEnvio.setId(cursor.getLong(0));
+				grupoEnvio.setNome(cursor.getString(1));
+				grupoEnvio.setCodigo(cursor.getLong(2));
+				grupoEnvio.setRecebimentoAtivado(cursor.getInt(3) == 1);
+				
+				return grupoEnvio;
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		
+		return null;
+	}
+	
 	public GrupoEnvio cadastrar(GrupoEnvio grupoEnvio){
 		
 		ContentValues values = new ContentValues();
 		
 		values.put("nome", grupoEnvio.getNome());
-		values.put("codigo", grupoEnvio.getNome());
+		values.put("codigo", grupoEnvio.getCodigo());
 		values.put("recebimentoAtivado", grupoEnvio.getRecebimentoAtivado() != null && 
 				grupoEnvio.getRecebimentoAtivado() ? 1 : 0);
 		
@@ -131,7 +157,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 		ContentValues values = new ContentValues();
 		
 		values.put("nome", grupoEnvio.getNome());
-		values.put("codigo", grupoEnvio.getNome());
+		values.put("codigo", grupoEnvio.getCodigo());
 		values.put("recebimentoAtivado", grupoEnvio.getRecebimentoAtivado() != null && 
 				grupoEnvio.getRecebimentoAtivado() ? 1 : 0);
 		
