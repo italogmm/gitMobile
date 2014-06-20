@@ -111,7 +111,7 @@ public class MainActivity extends ListActivity {
 		
 		if(!primeiraExecucao){
 			primeiraExecucao = false;
-			//finish();
+			finish();
 		}
 	}
 

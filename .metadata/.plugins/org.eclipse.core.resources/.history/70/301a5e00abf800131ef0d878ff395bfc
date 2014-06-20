@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.activity.adapter.ConfiguracaoRecebimentoListAdapter;
 import com.ufg.notificacoes.bean.GrupoEnvio;
 import com.ufg.notificacoes.dao.GrupoEnvioDao;
@@ -30,7 +31,7 @@ public class ConfiguracoesActivity extends ListActivity {
 		
 		if(!primeiraExecucao){
 			primeiraExecucao = false;
-			//finish();
+			finish();
 		}
 	}
 	

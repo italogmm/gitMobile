@@ -13,7 +13,7 @@ public class EnviaNotificacao {
 
 	public static void main(String[] args) {
 		
-		String mensagemTeste = "#GRUPO:5277#MSG:Hoje não haverá aula de novo!!!!!!! Será??1";
+		String mensagemTeste = "#GRUPO:5277#MSG:Hoje não haverá aula de novo!!!!!!! Será??";
 		System.out.println(mensagemTeste.substring(7, mensagemTeste.indexOf("#MSG:")));
 		System.out.println(mensagemTeste.substring(mensagemTeste.indexOf("#MSG:") + 5, mensagemTeste.length()));
 		

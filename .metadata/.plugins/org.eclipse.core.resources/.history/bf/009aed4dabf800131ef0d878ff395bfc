@@ -30,7 +30,7 @@ public class ConfiguracoesActivity extends ListActivity {
 		
 		if(!primeiraExecucao){
 			primeiraExecucao = false;
-			//finish();
+			finish();
 		}
 	}
 	
