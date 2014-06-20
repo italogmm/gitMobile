@@ -28,12 +28,13 @@
         android:text="corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo" />
 
     <Button
-        android:id="@+id/excluir"
+        android:id="@+id/marcarComoNaoLidaBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/corpo"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/remetente"
-        android:layout_marginBottom="86dp"
-        android:text="Excluir" />
+        android:layout_marginBottom="92dp"
+        android:layout_marginLeft="30dp"
+        android:text="Marcar como não lida" />
 
 </RelativeLayout>
