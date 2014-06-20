@@ -114,6 +114,10 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 		
 		return null;
 	}
+	
+	public void excluir(Notificacao notificacao){
+		getReadableDatabase().delete(TABELA, " id = " + notificacao.getId(), null);
+	}
 
 	public Notificacao cadastrar(Notificacao notificacao){
 		notificacao.setTimeData(new Date().getTime());

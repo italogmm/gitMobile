@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +18,8 @@ public class VisualizaNotificacaoActivity extends Activity {
 	TextView textViewCorpo;
 	Button marcarComoNaoLida;
 	Long idNotificacao;
+	NotificacaoDao notDAO;
+	Notificacao consultada;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,8 @@ public class VisualizaNotificacaoActivity extends Activity {
 		Bundle receiveBundle = this.getIntent().getExtras();
 		idNotificacao = receiveBundle.getLong("idNotificacao");
 		
-		final NotificacaoDao notDAO = new NotificacaoDao(this);
-		final Notificacao consultada = notDAO.consultar(idNotificacao);
+		notDAO = new NotificacaoDao(this);
+		consultada = notDAO.consultar(idNotificacao);
 		
 		txtViewRemetente = (TextView)findViewById(R.id.remetente);
 		textViewCorpo = (TextView)findViewById(R.id.corpo);
@@ -40,17 +41,6 @@ public class VisualizaNotificacaoActivity extends Activity {
 		
 		consultada.setLida(true);
 		notDAO.alterar(consultada);
-		
-		findViewById(R.id.marcarComoNaoLidaBtn).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						consultada.setLida(false);
-						notDAO.alterar(consultada);
-						Intent intent = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
-						startActivity(intent);
-					}
-				});
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -74,8 +64,22 @@ public class VisualizaNotificacaoActivity extends Activity {
 		 case android.R.id.home:
 			 Intent intent = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
 			 VisualizaNotificacaoActivity.this.startActivity(intent);
+			 break;
+		 case R.id.action_marcar_nao_lida:
+			 consultada.setLida(false);
+			 notDAO.alterar(consultada);
+			 Intent it = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
+			 startActivity(it);
+			 break;
+		 case R.id.action_delete:
+			 notDAO.excluir(consultada);
+			 Intent it1 = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
+			 startActivity(it1);
+			 break;
 		 default:
 		      return super.onOptionsItemSelected(item);
 		 }
+		
+		 return super.onOptionsItemSelected(item);
 	}
 }

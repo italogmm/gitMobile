@@ -3,9 +3,15 @@
     tools:context="com.ufg.notificacoes.ConsultaNotificacao" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_marcar_nao_lida"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="@string/action_marcar_nao_lida"/>
+    
+    <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_delete"/>
 
 </menu>
