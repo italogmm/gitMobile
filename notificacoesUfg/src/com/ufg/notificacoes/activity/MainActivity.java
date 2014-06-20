@@ -29,6 +29,7 @@ public class MainActivity extends ListActivity {
 	private List<Notificacao> notificacoes;
 	
 	private static boolean primeiraExecucao = true;
+	private static boolean gcmAtivo = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,12 @@ public class MainActivity extends ListActivity {
 		}
 		
 		super.onCreate(savedInstanceState);
-		GoogleCloudMessaging.ativa(getApplicationContext());
+		
+		if(!gcmAtivo || primeiraExecucao || !GoogleCloudMessaging.isAtivo(getApplicationContext())){
+			GoogleCloudMessaging.ativa(getApplicationContext());
+		}else{
+			gcmAtivo = true;
+		}
 	}
 	
 	@Override
@@ -59,6 +65,11 @@ public class MainActivity extends ListActivity {
 		 default:
 		      return super.onOptionsItemSelected(item);
 		 }
+	}
+	
+	@Override
+	public void onBackPressed() {
+		finishAffinity();
 	}
 	private void carregarLista(){
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
@@ -101,18 +112,12 @@ public class MainActivity extends ListActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
-		System.out.println("ON RESUME");
 		carregarLista();
 	}
 	
 	@Override
 	protected void onPause(){
 		super.onPause();
-		
-		if(!primeiraExecucao){
-			primeiraExecucao = false;
-			//finish();
-		}
 	}
 
 	public void incluirDadosParaTeste() throws Exception {

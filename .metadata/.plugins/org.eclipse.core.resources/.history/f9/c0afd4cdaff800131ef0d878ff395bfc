@@ -1,0 +1,58 @@
+package com.ufg.notificacoes.activity.adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.graphics.Typeface;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.bean.Notificacao;
+
+public class NotificacaoListAdapter extends ArrayAdapter<String> {
+	private final Context context;
+	List<Notificacao> notificacoes;
+ 
+	public NotificacaoListAdapter(Context context, List<Notificacao> notificacoes) {
+		super(context, R.layout.lista_notificacoes);
+		this.context = context;
+	}
+ 
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		
+		if(position > notificacoes.size() - 1){
+			return null;
+		}
+		
+		LayoutInflater inflater = (LayoutInflater) context
+			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+ 
+		View rowView = inflater.inflate(R.layout.lista_notificacoes, parent, false);
+		TextView textViewRemetente = (TextView) rowView.findViewById(R.id.nome);
+		TextView textViewTexto = (TextView) rowView.findViewById(R.id.texto);
+		TextView textViewData = (TextView) rowView.findViewById(R.id.data);
+		textViewRemetente.setText(nomesArray[position]);
+		textViewTexto.setText(textosArray[position]);
+		textViewData.setText(datasArray[position]);
+ 
+		// Change icon based on name
+		String s = nomesArray[position];
+ 
+		System.out.println(s);
+		
+		rowView.setId(Long.valueOf(idsArray[position]).intValue());
+		
+		if(!lidaArray[position]){
+			textViewRemetente.setTypeface(null, Typeface.BOLD);
+			textViewTexto.setTypeface(null, Typeface.BOLD);
+			textViewData.setTypeface(null, Typeface.BOLD);
+		}
+		
+		return rowView;
+	}
+}

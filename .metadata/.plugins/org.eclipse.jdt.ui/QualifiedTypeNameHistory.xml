@@ -14,7 +14,6 @@
 <fullyQualifiedTypeName name="com.ufg.notificacoes.util.Util"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.bean.Notificacao"/>
-<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.NotificacaoDao"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.bean.GrupoEnvio"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.activity.adapter.ConfiguracaoRecebimentoListAdapter"/>
@@ -24,8 +23,13 @@
 <fullyQualifiedTypeName name="android.widget.CheckBox"/>
 <fullyQualifiedTypeName name="android.widget.RadioGroup.OnCheckedChangeListener"/>
 <fullyQualifiedTypeName name="android.widget.CompoundButton.OnCheckedChangeListener"/>
-<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.GrupoEnvioDao"/>
 <fullyQualifiedTypeName name="android.widget.SearchView"/>
 <fullyQualifiedTypeName name="android.widget.SearchView.OnQueryTextListener"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.GrupoEnvioDao"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.dao.NotificacaoDao"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.test.DataGeneratorForTests"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.activity.VisualizaNotificacaoActivity"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.activity.MainActivity"/>
 </qualifiedTypeNameHistroy>

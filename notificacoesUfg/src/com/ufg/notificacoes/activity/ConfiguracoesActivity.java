@@ -30,7 +30,7 @@ public class ConfiguracoesActivity extends ListActivity {
 		
 		if(!primeiraExecucao){
 			primeiraExecucao = false;
-			//finish();
+			finish();
 		}
 	}
 	
@@ -75,5 +75,7 @@ public class ConfiguracoesActivity extends ListActivity {
 			final ListView listView = getListView();
 			listView.setTextFilterEnabled(true);
 		}
+		
+		getActionBar().setSubtitle("Escolha aqui quais notificações deseja receber");
 	}
 }

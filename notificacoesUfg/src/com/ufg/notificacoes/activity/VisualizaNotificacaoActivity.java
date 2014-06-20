@@ -44,7 +44,12 @@ public class VisualizaNotificacaoActivity extends Activity {
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-
+	
+	@Override
+	public void onBackPressed() {
+		finish();
+	}
+	
 	@Override
 	protected void onPause(){
 		super.onPause();
