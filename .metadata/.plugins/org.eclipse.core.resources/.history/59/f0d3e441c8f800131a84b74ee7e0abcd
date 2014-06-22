@@ -71,7 +71,6 @@ public class MainActivity extends ListActivity {
 	public void onBackPressed() {
 		finishAffinity();
 	}
-	
 	private void carregarLista(){
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
 		notificacoes = notificacaoDao.listar();

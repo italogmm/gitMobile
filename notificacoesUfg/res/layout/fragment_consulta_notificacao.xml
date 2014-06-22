@@ -25,16 +25,8 @@
         android:layout_below="@+id/remetente"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
+        android:autoLink="web" 
+        android:linksClickable="true" 
         android:text="corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo - corpo" />
-
-    <Button
-        android:id="@+id/marcarComoNaoLidaBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/corpo"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="92dp"
-        android:layout_marginLeft="30dp"
-        android:text="Marcar como não lida" />
 
 </RelativeLayout>

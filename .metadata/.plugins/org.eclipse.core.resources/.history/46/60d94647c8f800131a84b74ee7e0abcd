@@ -1,5 +1,11 @@
 package com.ufg.notificacoes.activity;
 
+import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.R.id;
+import com.ufg.notificacoes.R.layout;
+import com.ufg.notificacoes.R.menu;
+import com.ufg.notificacoes.R.string;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -14,8 +20,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.ufg.notificacoes.R;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
