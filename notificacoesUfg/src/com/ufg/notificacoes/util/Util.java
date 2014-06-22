@@ -2,7 +2,11 @@ package com.ufg.notificacoes.util;
 
 import java.security.MessageDigest;
 
+import com.ufg.notificacoes.bean.Usuario;
+
 public class Util {
+	
+	public static Usuario usuarioLogado;
 	
 	public static String criptografaSenha(String senha){
 		

@@ -1,5 +1,7 @@
 package com.ufg.notificacoes.activity;
 
+import java.util.Date;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -14,8 +16,16 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.bean.GrupoEnvio;
+import com.ufg.notificacoes.bean.Notificacao;
+import com.ufg.notificacoes.bean.Usuario;
+import com.ufg.notificacoes.dao.GrupoEnvioDao;
+import com.ufg.notificacoes.dao.NotificacaoDao;
+import com.ufg.notificacoes.dao.UsuarioDao;
+import com.ufg.notificacoes.util.Util;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -32,7 +42,7 @@ public class LoginActivity extends Activity {
 	/**
 	 * The default email to populate the email field with.
 	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+	public static final String EXTRA_EMAIL = "aluno@ufg.com.br";
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -86,6 +96,12 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		
+		try {
+			incluirDadosParaTeste();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -101,8 +117,20 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
+		
+		mEmail = mEmailView.getText().toString();
+		mPassword = mPasswordView.getText().toString();
+		
+		UsuarioDao usuarioDao = new UsuarioDao(this);
+		Usuario usuario = usuarioDao.validaLogin(mEmail, mPassword);
+		
+		if(usuario != null){
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+		}else{
+    		Toast.makeText(this, "Login ou senha incorretos!" , Toast.LENGTH_LONG).show();
+		}
+		
 //		if (mAuthTask != null) {
 //			return;
 //		}
@@ -112,8 +140,7 @@ public class LoginActivity extends Activity {
 //		mPasswordView.setError(null);
 //
 //		// Store values at the time of the login attempt.
-//		mEmail = mEmailView.getText().toString();
-//		mPassword = mPasswordView.getText().toString();
+//		
 //
 //		boolean cancel = false;
 //		View focusView = null;
@@ -197,7 +224,52 @@ public class LoginActivity extends Activity {
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
-
+	
+	public void incluirDadosParaTeste() throws Exception {
+		UsuarioDao usuarioDao = new UsuarioDao(this);
+		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
+		GrupoEnvioDao grupoEnvioDao = new GrupoEnvioDao(this);
+		
+		if(usuarioDao.listar().size() == 0){
+			Usuario usuario = new Usuario();
+			usuario.setNome("Italo Gustavo");
+			usuario.setMatricula("092492");
+			usuario.setSenha(Util.criptografaSenha("123456"));
+			usuario.setEmail("aluno@ufg.com.br");
+			usuario = usuarioDao.cadastrar(usuario);
+	
+			GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
+			grupoEnvioUFG.setNome("Universidade Federal de Goiás");
+			grupoEnvioUFG.setRecebimentoAtivado(true);
+			grupoEnvioUFG.setCodigo(0l);
+			grupoEnvioUFG = grupoEnvioDao.cadastrar(grupoEnvioUFG);
+			
+			GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
+			grupoEnvioEngSoftware.setNome("Engenharia de Software");
+			grupoEnvioEngSoftware.setRecebimentoAtivado(true);
+			grupoEnvioEngSoftware.setCodigo(5277l);
+			grupoEnvioEngSoftware = grupoEnvioDao.cadastrar(grupoEnvioEngSoftware);
+			
+			Notificacao notificacao1 = new Notificacao();
+			notificacao1.setLida(true);
+			notificacao1
+					.setTexto("Hoje não haverá aula da disciplina, estará disponível "
+							+ "no moodle uma ativiade válida como presença.");
+			notificacao1.setGrupoEnvio(grupoEnvioEngSoftware);
+			notificacao1.setTimeData(new Date().getTime());
+			notificacaoDao.cadastrar(notificacao1);
+			
+			Notificacao notificacao2 = new Notificacao();
+			notificacao2.setLida(false);
+			notificacao2
+					.setTexto("A universidade está em greve nos próximos dias, portanto, "
+							+ "até qualquer outro aviso as aulas estão suspensas.");
+			notificacao2.setGrupoEnvio(grupoEnvioUFG);
+			notificacao2.setTimeData(new Date().getTime());
+			notificacaoDao.cadastrar(notificacao2);
+		}
+	}
+	
 	/**
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.

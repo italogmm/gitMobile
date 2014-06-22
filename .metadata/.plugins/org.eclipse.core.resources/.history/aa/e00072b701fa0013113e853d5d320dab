@@ -4,20 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
-import android.widget.Toast;
 
 import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.activity.adapter.NotificacaoListAdapter;
@@ -35,6 +29,7 @@ public class MainActivity extends ListActivity {
 	private List<Notificacao> notificacoes;
 	
 	private static boolean primeiraExecucao = true;
+	private static boolean gcmAtivo = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,55 +40,18 @@ public class MainActivity extends ListActivity {
 		}
 		
 		super.onCreate(savedInstanceState);
-		GoogleCloudMessaging.ativa(getApplicationContext());
+		
+		if(!gcmAtivo || primeiraExecucao || !GoogleCloudMessaging.isAtivo(getApplicationContext())){
+			GoogleCloudMessaging.ativa(getApplicationContext());
+		}else{
+			gcmAtivo = true;
+		}
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		
-		//Create the search view
-	    final SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
-	    searchView.setQueryHint("Search");
-
-
-	    menu.add(Menu.NONE,Menu.NONE,1,"Search")
-	        .setIcon(R.drawable.abs__ic_search)
-	        .setActionView(searchView)
-	        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-
-	    searchView.setOnQueryTextListener(new OnQueryTextListener() {
-	        @Override
-	        public boolean onQueryTextChange(String newText) {
-	            if (newText.length() > 0) {
-	                // Search
-
-	            } else {
-	                // Do something when there's no input
-	            }
-	            return false;
-	        }
-	        @Override
-	        public boolean onQueryTextSubmit(String query) { 
-
-	            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-	            imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
-
-	            Toast.makeText(getBaseContext(), "dummy Search", Toast.LENGTH_SHORT).show();
-	            setSupportProgressBarIndeterminateVisibility(true);
-
-	            Handler handler = new Handler(); 
-	            handler.postDelayed(new Runnable() { 
-	                 public void run() { 
-	                     setSupportProgressBarIndeterminateVisibility(false);
-	                 } 
-	            }, 2000);
-
-	            return false; }
-	    });
-	    
 		return true;
 	}
 	
@@ -108,6 +66,12 @@ public class MainActivity extends ListActivity {
 		      return super.onOptionsItemSelected(item);
 		 }
 	}
+	
+	@Override
+	public void onBackPressed() {
+		finishAffinity();
+	}
+	
 	private void carregarLista(){
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
 		notificacoes = notificacaoDao.listar();
@@ -155,39 +119,35 @@ public class MainActivity extends ListActivity {
 	@Override
 	protected void onPause(){
 		super.onPause();
-		
-		if(!primeiraExecucao){
-			primeiraExecucao = false;
-			finish();
-		}
 	}
 
 	public void incluirDadosParaTeste() throws Exception {
-
 		UsuarioDao usuarioDao = new UsuarioDao(this);
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
 		GrupoEnvioDao grupoEnvioDao = new GrupoEnvioDao(this);
 		
-		if(grupoEnvioDao.listar().size() == 0){
+		if(usuarioDao.listar().size() == 0){
 			Usuario usuario = new Usuario();
 			usuario.setNome("Italo Gustavo");
 			usuario.setMatricula("092492");
 			usuario.setSenha(Util.criptografaSenha("123456"));
-			usuario.setEmail("italogmm@gmail.com");
+			usuario.setEmail("aluno@ufg.com.br");
 			usuario = usuarioDao.cadastrar(usuario);
 	
 			GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
-			grupoEnvioUFG.setNome("UFG");
+			grupoEnvioUFG.setNome("Universidade Federal de Goiás");
 			grupoEnvioUFG.setRecebimentoAtivado(true);
+			grupoEnvioUFG.setCodigo(0l);
 			grupoEnvioUFG = grupoEnvioDao.cadastrar(grupoEnvioUFG);
 			
 			GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
 			grupoEnvioEngSoftware.setNome("Engenharia de Software");
 			grupoEnvioEngSoftware.setRecebimentoAtivado(true);
+			grupoEnvioEngSoftware.setCodigo(5277l);
 			grupoEnvioEngSoftware = grupoEnvioDao.cadastrar(grupoEnvioEngSoftware);
 			
 			Notificacao notificacao1 = new Notificacao();
-			notificacao1.setLida(false);
+			notificacao1.setLida(true);
 			notificacao1
 					.setTexto("Hoje não haverá aula da disciplina, estará disponível "
 							+ "no moodle uma ativiade válida como presença.");

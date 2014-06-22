@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.ufg.notificacoes.bean.Usuario;
+import com.ufg.notificacoes.util.Util;
 
 public class UsuarioDao extends SQLiteOpenHelper{
 
@@ -87,6 +88,34 @@ public class UsuarioDao extends SQLiteOpenHelper{
 	public Usuario consultar(long id){
 
 		String sql = "SELECT id, nome, email, matricula, senha FROM " + TABELA + " where id = " + id;
+		
+		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+		
+		try{
+			while(cursor.moveToNext()){
+				Usuario usuario = new Usuario();
+				
+				usuario.setId(cursor.getLong(0));
+				usuario.setNome(cursor.getString(1));
+				usuario.setEmail(cursor.getString(2));
+				usuario.setMatricula(cursor.getString(3));
+				usuario.setSenha(cursor.getString(4));
+				
+				return usuario;
+			}
+		}catch(SQLException e){
+			Log.e(TAG, e.getMessage());
+		}finally{
+			cursor.close();
+		}
+		
+		return null;
+	}
+	
+	public Usuario validaLogin(String email, String senha){
+
+		String sql = "SELECT id, nome, email, matricula, senha FROM " + TABELA + " where email like '" + email +
+				"' and senha like '" + Util.criptografaSenha(senha) + "'";
 		
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		
