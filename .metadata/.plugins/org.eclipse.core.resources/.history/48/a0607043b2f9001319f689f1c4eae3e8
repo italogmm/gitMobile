@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.bean.Notificacao;
@@ -76,13 +75,11 @@ public class VisualizaNotificacaoActivity extends Activity {
 			 notDAO.alterar(consultada);
 			 Intent it = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
 			 startActivity(it);
-			 Toast.makeText(this, "Definida como não lida com sucesso!" , Toast.LENGTH_LONG).show();
 			 break;
 		 case R.id.action_delete:
 			 notDAO.excluir(consultada);
 			 Intent it1 = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
 			 startActivity(it1);
-			 Toast.makeText(this, "Notificação excluída com sucesso!" , Toast.LENGTH_LONG).show();
 			 break;
 		 default:
 		      return super.onOptionsItemSelected(item);
