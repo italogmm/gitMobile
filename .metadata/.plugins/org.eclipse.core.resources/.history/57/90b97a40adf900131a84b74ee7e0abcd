@@ -37,7 +37,7 @@ public class VisualizaNotificacaoActivity extends Activity {
 		textViewCorpo = (TextView)findViewById(R.id.corpo);
 		
 		txtViewRemetente.setText(consultada.getGrupoEnvio().getNome());
-		textViewCorpo.setText(consultada.getTexto() + " - Em " + consultada.getDataFormatada());
+		textViewCorpo.setText(consultada.getTexto());
 		
 		consultada.setLida(true);
 		notDAO.alterar(consultada);

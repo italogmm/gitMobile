@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">UFGNow</string>
+    <string name="app_name">Notificações UFG</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_config">Configurações</string>
     <string name="action_settings">Configurações</string>
@@ -9,6 +9,6 @@
     <string name="action_configurar_recebimento">Configurar recebimento</string>
     <string name="action_entrar">Entrar</string>
     <string name="title_activity_inicio">Inicio</string>
-    <string name="title_activity_consulta_notificacao">Visualização de notificação</string>
+    <string name="title_activity_consulta_notificacao">ConsultaNotificacao</string>
     <string name="title_activity_configuracoes_recebimento">Configurar recebimento</string>
 </resources>
