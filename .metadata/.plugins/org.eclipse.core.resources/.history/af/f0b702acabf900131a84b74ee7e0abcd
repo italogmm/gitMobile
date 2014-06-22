@@ -1,7 +1,6 @@
 package com.ufg.notificacoes.activity.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,10 +57,9 @@ public class NotificacaoListAdapter extends ArrayAdapter<String> {
 			textViewRemetente.setTypeface(null, Typeface.BOLD);
 			textViewTexto.setTypeface(null, Typeface.BOLD);
 			textViewData.setTypeface(null, Typeface.BOLD);
-			
-			rowView.setBackgroundColor(Color.rgb(205,205,205));
 		}
 		
+		rowView.setBackgroundColor(Color.parseColor("#rrggbb"));
 		return rowView;
 	}
 }

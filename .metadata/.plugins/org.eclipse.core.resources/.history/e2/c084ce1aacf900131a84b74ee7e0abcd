@@ -58,10 +58,8 @@ public class NotificacaoListAdapter extends ArrayAdapter<String> {
 			textViewRemetente.setTypeface(null, Typeface.BOLD);
 			textViewTexto.setTypeface(null, Typeface.BOLD);
 			textViewData.setTypeface(null, Typeface.BOLD);
-			
-			rowView.setBackgroundColor(Color.rgb(205,205,205));
 		}
-		
+		rowView.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
 		return rowView;
 	}
 }
