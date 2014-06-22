@@ -54,7 +54,7 @@ public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
 		    	if(isChecked){
 		    		Toast.makeText(context, "Recebimento do grupo " + grupoEnvio.getNome() + " ativado!" , Toast.LENGTH_LONG).show();
 		    	}else{
-		    		Toast.makeText(context, "Recebimento do grupo " + grupoEnvio.getNome() + " desativado!" , Toast.LENGTH_LONG).show();
+		    		
 		    	}
 		    }
 		});

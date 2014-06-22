@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Toast;
 
 import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.bean.GrupoEnvio;
@@ -52,9 +51,9 @@ public class ConfiguracaoRecebimentoListAdapter extends ArrayAdapter<String> {
 		    	grupoEnvioDao.alterar(grupoEnvio);
 		    	
 		    	if(isChecked){
-		    		Toast.makeText(context, "Recebimento do grupo " + grupoEnvio.getNome() + " ativado!" , Toast.LENGTH_LONG).show();
+		    		Toast.makeText(getApplicationContext(), "Recebimento do grupo " + grupoEnvio.getNome() + " ativado!" , Toast.LENGTH_LONG).show();
 		    	}else{
-		    		Toast.makeText(context, "Recebimento do grupo " + grupoEnvio.getNome() + " desativado!" , Toast.LENGTH_LONG).show();
+		    		
 		    	}
 		    }
 		});
