@@ -1,0 +1,23 @@
+package com.ufg.notificacoes.bean;
+
+public class Configuracoes {
+	
+	private Long id;
+	private Usuario usuarioLogado;
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+}
