@@ -16,7 +16,7 @@ import com.ufg.notificacoes.bean.GrupoEnvio;
 
 public class GrupoEnvioDao extends SQLiteOpenHelper{
 
-	private static final int VERSAO = 5;
+	private static final int VERSAO = 6;
 	public static final String TABELA = "Grupoenvio";
 	private static final String DATABASE = "NotificacoesUFG";
 	

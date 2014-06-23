@@ -19,9 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ufg.notificacoes.R;
+import com.ufg.notificacoes.bean.Configuracoes;
 import com.ufg.notificacoes.bean.GrupoEnvio;
 import com.ufg.notificacoes.bean.Notificacao;
 import com.ufg.notificacoes.bean.Usuario;
+import com.ufg.notificacoes.dao.ConfiguracoesDao;
 import com.ufg.notificacoes.dao.GrupoEnvioDao;
 import com.ufg.notificacoes.dao.NotificacaoDao;
 import com.ufg.notificacoes.dao.UsuarioDao;
@@ -126,6 +128,18 @@ public class LoginActivity extends Activity {
 		
 		if(usuario != null){
 			Intent intent = new Intent(this, MainActivity.class);
+			
+			ConfiguracoesDao configDao = new ConfiguracoesDao(this);
+			Configuracoes config = configDao.consultar();
+			
+			if(config == null){
+				config = new Configuracoes();
+				config.setUsuarioLogado(usuario);
+				configDao.incluir(config);
+			}else{
+				config.setUsuarioLogado(usuario);
+				configDao.alterar(config);
+			}
 			startActivity(intent);
 		}else{
     		Toast.makeText(this, "Login ou senha incorretos!" , Toast.LENGTH_LONG).show();

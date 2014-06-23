@@ -1,0 +1,18 @@
+package com.ufg.notificacoes.dao;
+
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class ConfiguracoesDao extends SQLiteOpenHelper{
+	
+	private static final int VERSAO = 5;
+	private static final String TABELA = "Configuracoes";
+	private static final String DATABASE = "NotificacoesUFG";
+	
+	private static final String TAG = "CADASTRO_CONFIGURACAO";
+	public static final String ddlCreate = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, "
+			+ "nome TEXT, "
+			+ "email TEXT, "
+			+ "matricula TEXT, "
+			+ "senha TEXT)";
+
+}
