@@ -32,6 +32,15 @@ public class MainActivity extends ListActivity {
 		
 		super.onCreate(savedInstanceState);
 		
+		ConfiguracoesDao configDao = new ConfiguracoesDao(this);
+		Configuracoes config = configDao.consultar();
+		
+		if(config != null && config.getUsuarioLogado() != null){
+			 Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
+	         MainActivity.this.startActivity(intent);
+	         finish();
+		}
+		
 		if(!gcmAtivo || primeiraExecucao || !GoogleCloudMessaging.isAtivo(getApplicationContext())){
 			GoogleCloudMessaging.ativa(getApplicationContext());
 		}else{

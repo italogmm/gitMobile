@@ -70,8 +70,8 @@ public class LoginActivity extends Activity {
 		Configuracoes config = configDao.consultar();
 		
 		if(config != null && config.getUsuarioLogado() != null){
-			 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-			 LoginActivity.this.startActivity(intent);
+			 Intent intent = new Intent(MainActivity.this, MainActivity.class);
+	         MainActivity.this.startActivity(intent);
 	         finish();
 		}
 		

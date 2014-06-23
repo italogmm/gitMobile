@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.activity.adapter.NotificacaoListAdapter;
-import com.ufg.notificacoes.bean.Configuracoes;
 import com.ufg.notificacoes.bean.Notificacao;
 import com.ufg.notificacoes.dao.ConfiguracoesDao;
 import com.ufg.notificacoes.dao.NotificacaoDao;
@@ -31,6 +30,10 @@ public class MainActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		
+		ConfiguracoesDao configDao = new ConfiguracoesDao(this);
+		Configuracoes = configDao.consultar();
+		
 		
 		if(!gcmAtivo || primeiraExecucao || !GoogleCloudMessaging.isAtivo(getApplicationContext())){
 			GoogleCloudMessaging.ativa(getApplicationContext());
