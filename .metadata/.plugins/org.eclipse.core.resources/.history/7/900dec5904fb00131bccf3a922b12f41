@@ -65,19 +65,15 @@ public class MainActivity extends ListActivity {
 			Intent intent = new Intent(MainActivity.this,
 					ConfiguracoesActivity.class);
 			MainActivity.this.startActivity(intent);
-			break;
 		case R.id.action_logout:
 			Configuracoes config = configDao.consultar();
 			config.setUsuarioLogado(null);
 			configDao.alterar(config);
 			Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
 			MainActivity.this.startActivity(intentLogin);
-			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

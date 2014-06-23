@@ -72,12 +72,9 @@ public class MainActivity extends ListActivity {
 			configDao.alterar(config);
 			Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
 			MainActivity.this.startActivity(intentLogin);
-			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
