@@ -1092,6 +1092,7 @@ containing a value of this type.
         public static final int action_context_bar=0x7f05001d;
         public static final int action_delete=0x7f050051;
         public static final int action_forgot_password=0x7f050053;
+        public static final int action_logout=0x7f050055;
         public static final int action_marcar_nao_lida=0x7f050050;
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
@@ -1279,27 +1280,28 @@ containing a value of this type.
         public static final int action_config=0x7f0a000f;
         public static final int action_configurar_recebimento=0x7f0a0013;
         public static final int action_delete=0x7f0a0011;
-        public static final int action_entrar=0x7f0a0014;
-        public static final int action_forgot_password=0x7f0a001d;
+        public static final int action_entrar=0x7f0a0015;
+        public static final int action_forgot_password=0x7f0a001e;
+        public static final int action_logout=0x7f0a0014;
         public static final int action_marcar_nao_lida=0x7f0a0012;
         public static final int action_settings=0x7f0a0010;
-        public static final int action_sign_in_register=0x7f0a001b;
-        public static final int action_sign_in_short=0x7f0a001c;
+        public static final int action_sign_in_register=0x7f0a001c;
+        public static final int action_sign_in_short=0x7f0a001d;
         public static final int app_name=0x7f0a000d;
-        public static final int error_field_required=0x7f0a0022;
-        public static final int error_incorrect_password=0x7f0a0021;
-        public static final int error_invalid_email=0x7f0a001f;
-        public static final int error_invalid_password=0x7f0a0020;
+        public static final int error_field_required=0x7f0a0023;
+        public static final int error_incorrect_password=0x7f0a0022;
+        public static final int error_invalid_email=0x7f0a0020;
+        public static final int error_invalid_password=0x7f0a0021;
         public static final int hello_world=0x7f0a000e;
-        public static final int login_progress_signing_in=0x7f0a001e;
+        public static final int login_progress_signing_in=0x7f0a001f;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f0a0019;
-        public static final int prompt_password=0x7f0a001a;
-        public static final int title_activity_configuracoes_recebimento=0x7f0a0017;
-        public static final int title_activity_consulta_notificacao=0x7f0a0016;
-        public static final int title_activity_inicio=0x7f0a0015;
-        public static final int title_activity_login=0x7f0a0018;
+        public static final int prompt_email=0x7f0a001a;
+        public static final int prompt_password=0x7f0a001b;
+        public static final int title_activity_configuracoes_recebimento=0x7f0a0018;
+        public static final int title_activity_consulta_notificacao=0x7f0a0017;
+        public static final int title_activity_inicio=0x7f0a0016;
+        public static final int title_activity_login=0x7f0a0019;
     }
     public static final class style {
         /** 

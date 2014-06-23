@@ -23,92 +23,113 @@ import com.ufg.notificacoes.util.GoogleCloudMessaging;
 public class MainActivity extends ListActivity {
 
 	private List<Notificacao> notificacoes;
-	
+	ConfiguracoesDao configDao;
 	private static boolean primeiraExecucao = true;
 	private static boolean gcmAtivo = false;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
+		configDao = new ConfiguracoesDao(this);
 		
-		if(!gcmAtivo || primeiraExecucao || !GoogleCloudMessaging.isAtivo(getApplicationContext())){
+		if (!gcmAtivo || primeiraExecucao
+				|| !GoogleCloudMessaging.isAtivo(getApplicationContext())) {
 			GoogleCloudMessaging.ativa(getApplicationContext());
-		}else{
+		} else {
 			gcmAtivo = true;
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		
+		Configuracoes config = configDao.consultar();
+
+		MenuItem menuItemLogout = menu.findItem(R.id.action_logout);
+		menuItemLogout.setVisible(config != null && config.getUsuarioLogado() != null);
+		
+		return true;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		 switch (item.getItemId()) {
-		 case R.id.action_config:
-			 Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
-	         MainActivity.this.startActivity(intent);
-		 default:
-		      return super.onOptionsItemSelected(item);
-		 }
+
+		switch (item.getItemId()) {
+		case R.id.action_config:
+			Intent intent = new Intent(MainActivity.this,
+					ConfiguracoesActivity.class);
+			MainActivity.this.startActivity(intent);
+		case R.id.action_logout:
+			Configuracoes config = configDao.consultar();
+			config.setUsuarioLogado(null);
+			configDao.alterar(config);
+			Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+			MainActivity.this.startActivity(intentLogin);
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		finishAffinity();
 	}
-	
-	private void carregarLista(){
+
+	private void carregarLista() {
 		NotificacaoDao notificacaoDao = new NotificacaoDao(this);
 		notificacoes = notificacaoDao.listar();
 		notificacaoDao.close();
-		
-		String[] ids = new String[notificacoes.size()] ;
-		String[] remetentes = new String[notificacoes.size()] ;
-		String[] textosNotificacoes = new String[notificacoes.size()] ;
+
+		String[] ids = new String[notificacoes.size()];
+		String[] remetentes = new String[notificacoes.size()];
+		String[] textosNotificacoes = new String[notificacoes.size()];
 		String[] datas = new String[notificacoes.size()];
 		Boolean[] lida = new Boolean[notificacoes.size()];
-		
-		for(int x = 0; x < notificacoes.size() && x < 15; x++){
+
+		for (int x = 0; x < notificacoes.size() && x < 15; x++) {
 			remetentes[x] = notificacoes.get(x).getGrupoEnvio().getNome();
 			textosNotificacoes[x] = notificacoes.get(x).getTexto();
 			datas[x] = notificacoes.get(x).getDataFormatada();
 			ids[x] = notificacoes.get(x).getId().toString();
 			lida[x] = notificacoes.get(x).getLida();
 		}
-		
-		if(notificacoes.size() > 0){
-			setListAdapter(new NotificacaoListAdapter(this, remetentes, textosNotificacoes, datas, ids, lida));
+
+		if (notificacoes.size() > 0) {
+			setListAdapter(new NotificacaoListAdapter(this, remetentes,
+					textosNotificacoes, datas, ids, lida));
 			final ListView listView = getListView();
 			listView.setTextFilterEnabled(true);
-			listView.setOnItemClickListener(new OnItemClickListener(){
-	        @Override
-	        public void onItemClick(AdapterView<?> Parent, View view, int position,
-	                long id) {
-	        	
-	        	Intent intent = new Intent(MainActivity.this, VisualizaNotificacaoActivity.class);
-	        	Bundle sendBundle = new Bundle();
-	            sendBundle.putLong("idNotificacao", view.getId());
-	            intent.putExtras(sendBundle);
-	            
-	            MainActivity.this.startActivity(intent);
-	        }});
+			listView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> Parent, View view,
+						int position, long id) {
+
+					Intent intent = new Intent(MainActivity.this,
+							VisualizaNotificacaoActivity.class);
+					Bundle sendBundle = new Bundle();
+					sendBundle.putLong("idNotificacao", view.getId());
+					intent.putExtras(sendBundle);
+
+					MainActivity.this.startActivity(intent);
+				}
+			});
 		}
 	}
-	
+
 	@Override
-	protected void onResume(){
+	protected void onResume() {
 		super.onResume();
 		carregarLista();
 	}
-	
+
 	@Override
-	protected void onPause(){
+	protected void onPause() {
 		super.onPause();
 	}
 }

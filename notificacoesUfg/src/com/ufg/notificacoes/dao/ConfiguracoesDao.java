@@ -64,7 +64,7 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 				Usuario usuarioLogado = null;
 				
 				Long idUsuarioLogado = cursor.getLong(1);
-				if(idUsuarioLogado != null){
+				if(idUsuarioLogado != null && idUsuarioLogado != 0){
 					usuarioLogado = new Usuario();
 					usuarioLogado.setId(idUsuarioLogado);
 					usuarioLogado.setNome(cursor.getString(2));
@@ -90,7 +90,10 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 	public Configuracoes alterar(Configuracoes configuracoes){
 		ContentValues values = new ContentValues();
 		
-		values.put("id_usuario_logado", configuracoes.getUsuarioLogado().getId());
+		if(configuracoes.getUsuarioLogado() != null)
+			values.put("id_usuario_logado", configuracoes.getUsuarioLogado().getId());
+		else
+			values.putNull("id_usuario_logado");
 		
 		getWritableDatabase().update(TABELA, values, " id = " + configuracoes.getId(), null);
 		Log.i(TAG, "NOTIFICACAO CADASTRADA!");
@@ -101,7 +104,10 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 	public Configuracoes incluir(Configuracoes configuracoes){
 		ContentValues values = new ContentValues();
 		
-		values.put("id_usuario_logado", configuracoes.getUsuarioLogado().getId());
+		if(configuracoes.getUsuarioLogado() != null)
+			values.put("id_usuario_logado", configuracoes.getUsuarioLogado().getId());
+		else
+			values.putNull("id_usuario_logado");
 		
 		getWritableDatabase().insert(TABELA, null,values);
 		Log.i(TAG, "NOTIFICACAO CADASTRADA!");

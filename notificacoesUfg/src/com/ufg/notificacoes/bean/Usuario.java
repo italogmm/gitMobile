@@ -2,7 +2,7 @@ package com.ufg.notificacoes.bean;
 
 public class Usuario {
 
-	private long id;
+	private Long id;
 	private String nome;
 	private String email;
 	private String matricula;
@@ -14,10 +14,10 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {
