@@ -4,6 +4,7 @@ public class Configuracoes {
 	
 	private Long id;
 	private Usuario usuarioLogado;
+	private Boolean utilizandoSemLogin;
 
 	public Usuario getUsuarioLogado() {
 		return usuarioLogado;
@@ -19,5 +20,13 @@ public class Configuracoes {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Boolean getUtilizandoSemLogin() {
+		return utilizandoSemLogin;
+	}
+
+	public void setUtilizandoSemLogin(Boolean utilizandoSemLogin) {
+		this.utilizandoSemLogin = utilizandoSemLogin;
 	}
 }

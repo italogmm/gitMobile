@@ -54,6 +54,9 @@ public class MainActivity extends ListActivity {
 		MenuItem menuItemLogout = menu.findItem(R.id.action_logout);
 		menuItemLogout.setVisible(config != null && config.getUsuarioLogado() != null);
 		
+		MenuItem menuItemLogin= menu.findItem(R.id.action_login);
+		menuItemLogin.setVisible(config != null && config.getUtilizandoSemLogin() != null && config.getUtilizandoSemLogin());
+		
 		return true;
 	}
 
@@ -69,9 +72,18 @@ public class MainActivity extends ListActivity {
 		case R.id.action_logout:
 			Configuracoes config = configDao.consultar();
 			config.setUsuarioLogado(null);
+			config.setUtilizandoSemLogin(false);
 			configDao.alterar(config);
 			Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
 			MainActivity.this.startActivity(intentLogin);
+			break;
+		case R.id.action_login:
+			Configuracoes configuracoes = configDao.consultar();
+			configuracoes.setUsuarioLogado(null);
+			configuracoes.setUtilizandoSemLogin(false);
+			configDao.alterar(configuracoes);
+			Intent itLogin = new Intent(MainActivity.this, LoginActivity.class);
+			MainActivity.this.startActivity(itLogin);
 			break;
 		default:
 			return super.onOptionsItemSelected(item);

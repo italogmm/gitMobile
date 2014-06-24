@@ -1,7 +1,0 @@
-package com.ufg.notificacoes.dao;
-
-import android.database.sqlite.SQLiteOpenHelper;
-
-public class ConfiguracoesDao extends SQLiteOpenHelper{
-
-}

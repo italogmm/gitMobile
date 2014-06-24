@@ -14,12 +14,12 @@ import com.ufg.notificacoes.bean.Usuario;
 
 public class ConfiguracoesDao extends SQLiteOpenHelper{
 	
-	private static final int VERSAO = 6;
+	private static final int VERSAO = 7;
 	private static final String TABELA = "Configuracoes";
 	private static final String DATABASE = "NotificacoesUFG";
 	
 	private static final String TAG = "CADASTRO_CONFIGURACAO";
-	public static final String ddlCreate = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, id_usuario_logado INTEGER)";
+	public static final String ddlCreate = "CREATE TABLE " + TABELA + "( id INTEGER PRIMARY KEY, id_usuario_logado INTEGER, utilizando_sem_login INTEGER)";
 	
 	public ConfiguracoesDao(){
 		super(null, DATABASE, null, VERSAO);
@@ -50,7 +50,7 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 	
 	public Configuracoes consultar(){
 		
-		String sql = "SELECT config.id, usu.id, usu.nome, usu.email, usu.matricula, usu.senha  FROM " + TABELA + " config "
+		String sql = "SELECT config.id, config.utilizando_sem_login, usu.id, usu.nome, usu.email, usu.matricula, usu.senha  FROM " + TABELA + " config "
 				+ " left join " + UsuarioDao.TABELA + " usu on usu.id = config.id_usuario_logado ";
 		
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
@@ -63,17 +63,18 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 				
 				Usuario usuarioLogado = null;
 				
-				Long idUsuarioLogado = cursor.getLong(1);
+				Long idUsuarioLogado = cursor.getLong(2);
 				if(idUsuarioLogado != null && idUsuarioLogado != 0){
 					usuarioLogado = new Usuario();
 					usuarioLogado.setId(idUsuarioLogado);
-					usuarioLogado.setNome(cursor.getString(2));
-					usuarioLogado.setEmail(cursor.getString(3));
-					usuarioLogado.setMatricula(cursor.getString(4));
-					usuarioLogado.setSenha(cursor.getString(5));
+					usuarioLogado.setNome(cursor.getString(3));
+					usuarioLogado.setEmail(cursor.getString(4));
+					usuarioLogado.setMatricula(cursor.getString(5));
+					usuarioLogado.setSenha(cursor.getString(6));
 				}
 				configuracoes.setUsuarioLogado(usuarioLogado);
 				configuracoes.setId(cursor.getLong(0));
+				configuracoes.setUtilizandoSemLogin(cursor.getInt(1) == 1);
 				
 				return configuracoes;
 			}
@@ -95,6 +96,8 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 		else
 			values.putNull("id_usuario_logado");
 		
+		values.put("utilizando_sem_login", configuracoes.getUtilizandoSemLogin() != null && configuracoes.getUtilizandoSemLogin() ? 1 : 0);
+		
 		getWritableDatabase().update(TABELA, values, " id = " + configuracoes.getId(), null);
 		Log.i(TAG, "NOTIFICACAO CADASTRADA!");
 		
@@ -108,6 +111,8 @@ public class ConfiguracoesDao extends SQLiteOpenHelper{
 			values.put("id_usuario_logado", configuracoes.getUsuarioLogado().getId());
 		else
 			values.putNull("id_usuario_logado");
+		
+		values.put("utilizando_sem_login", configuracoes.getUtilizandoSemLogin() != null && configuracoes.getUtilizandoSemLogin() ? 1 : 0);
 		
 		getWritableDatabase().insert(TABELA, null,values);
 		Log.i(TAG, "NOTIFICACAO CADASTRADA!");

@@ -17,7 +17,7 @@ import com.ufg.notificacoes.util.Util;
 
 public class UsuarioDao extends SQLiteOpenHelper{
 
-	private static final int VERSAO = 6;
+	private static final int VERSAO = 7;
 	public static final String TABELA = "Usuario";
 	private static final String DATABASE = "NotificacoesUFG";
 	

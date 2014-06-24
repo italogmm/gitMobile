@@ -83,15 +83,21 @@
 
             <Button
                 android:id="@+id/sign_in_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
                 android:text="@string/action_entrar" />
 
+            <Button
+                android:id="@+id/entrarSemLoginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.24"
+                android:text="Entrar sem login" />
         </LinearLayout>
+
     </ScrollView>
 
 </merge>

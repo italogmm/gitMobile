@@ -39,4 +39,6 @@
 <fullyQualifiedTypeName name="com.ufg.notificacoes.R.layout"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.activity.ConfiguracoesActivity"/>
 <fullyQualifiedTypeName name="com.ufg.notificacoes.dao.ConfiguracoesDao"/>
+<fullyQualifiedTypeName name="com.ufg.notificacoes.activity.LoginActivity"/>
+<fullyQualifiedTypeName name="java.lang.Long"/>
 </qualifiedTypeNameHistroy>

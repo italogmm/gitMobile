@@ -13,9 +13,10 @@ public class EnviaNotificacao {
 
 	public static void main(String[] args) {
 		
-		String mensagemTeste = "#GRUPO:5277#MSG:Hoje não havesdsdrá aula de novo!!!!!!! Será??1 www.google.com.br";
-		System.out.println(mensagemTeste.substring(7, mensagemTeste.indexOf("#MSG:")));
+		String mensagemTeste = "#PUBLIC:1#GRUPO:5277#MSG:Hoje não havesdsdrá aula de novo!!!!!!! Será??1 www.google.com.br";
+		System.out.println(mensagemTeste.substring(16, mensagemTeste.indexOf("#MSG:")));
 		System.out.println(mensagemTeste.substring(mensagemTeste.indexOf("#MSG:") + 5, mensagemTeste.length()));
+		System.out.println(mensagemTeste.substring(8, mensagemTeste.indexOf("#GRUPO:")));
 		
 		Sender sender = new Sender(API_KEY);
 		Message message = new Message.Builder()

@@ -13,8 +13,10 @@ import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.activity.VisualizaNotificacaoActivity;
+import com.ufg.notificacoes.bean.Configuracoes;
 import com.ufg.notificacoes.bean.GrupoEnvio;
 import com.ufg.notificacoes.bean.Notificacao;
+import com.ufg.notificacoes.dao.ConfiguracoesDao;
 import com.ufg.notificacoes.dao.GrupoEnvioDao;
 import com.ufg.notificacoes.dao.NotificacaoDao;
 
@@ -52,13 +54,23 @@ public class GCMIntentService extends GCMBaseIntentService {
 		String mensagem = intent.getExtras().getString("mensagem");
 		Log.i(Constantes.TAG, "Mensagem recebida: " + mensagem);
 		
+		/**
+		 * O formato padrão da mensagem recebida deverá ser:
+		 * #PUBLIC:1#GRUPO:numero_do_grupo#MSG:mensagem_recebida
+		 * Onde:
+		 * #PUBLIC define se a notificação é pública ou não (1 = sim, 0 = não)
+		 * #GRUPO: código do grupo de envio que enviou a mensagem.
+		 * #MSG: a mensagem de fato enviada.
+		 */
 		if(validaMensagem(mensagem)){
-			String grupoEnvio = mensagem.substring(7, mensagem.indexOf("#MSG:"));
+			String grupoEnvio = mensagem.substring(16, mensagem.indexOf("#MSG:"));
 			String msg = mensagem.substring(mensagem.indexOf("#MSG:") + 5, mensagem.length());
+			Boolean msgPublica = mensagem.substring(8, mensagem.indexOf("#GRUPO:")).equals("1");
 			
 			GrupoEnvio grpEnvio = grupoEnvioDao.consultarPorCodigo(grupoEnvio);
+			Configuracoes config = new ConfiguracoesDao().consultar();
 			
-			if(grpEnvio != null && grpEnvio.getRecebimentoAtivado() != null && grpEnvio.getRecebimentoAtivado()){
+			if((config.getUsuarioLogado() != null || msgPublica) && grpEnvio != null && grpEnvio.getRecebimentoAtivado() != null && grpEnvio.getRecebimentoAtivado()){
 				NotificacaoDao notDao = new NotificacaoDao(context);
 				Notificacao notificacao = notDao.cadastrar(new Notificacao(grpEnvio, msg));
 				

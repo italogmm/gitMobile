@@ -18,7 +18,7 @@ import com.ufg.notificacoes.bean.Notificacao;
 
 public class NotificacaoDao extends SQLiteOpenHelper{
 
-	private static final int VERSAO = 6;
+	private static final int VERSAO = 7;
 	private static final String TABELA = "Notificacao";
 	private static final String DATABASE = "NotificacoesUFG";
 	
