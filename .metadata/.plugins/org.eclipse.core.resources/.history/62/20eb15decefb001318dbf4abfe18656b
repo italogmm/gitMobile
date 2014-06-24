@@ -44,7 +44,7 @@ public class ConfiguracoesActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		 case android.R.id.home:
-			 Intent intent = new Intent(ConfiguracoesActivity.this, ListarNotificacoesActivity.class);
+			 Intent intent = new Intent(ConfiguracoesActivity.this, MainActivity.class);
 			 ConfiguracoesActivity.this.startActivity(intent);
 			 break;
 		 default:

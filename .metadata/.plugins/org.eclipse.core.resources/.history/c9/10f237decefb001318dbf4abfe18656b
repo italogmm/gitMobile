@@ -68,19 +68,19 @@ public class VisualizaNotificacaoActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		 case android.R.id.home:
-			 Intent intent = new Intent(VisualizaNotificacaoActivity.this, ListarNotificacoesActivity.class);
+			 Intent intent = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
 			 VisualizaNotificacaoActivity.this.startActivity(intent);
 			 break;
 		 case R.id.action_marcar_nao_lida:
 			 consultada.setLida(false);
 			 notDAO.alterar(consultada);
-			 Intent it = new Intent(VisualizaNotificacaoActivity.this, ListarNotificacoesActivity.class);
+			 Intent it = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
 			 startActivity(it);
 			 Toast.makeText(this, "Definida como não lida com sucesso!" , Toast.LENGTH_LONG).show();
 			 break;
 		 case R.id.action_delete:
 			 notDAO.excluir(consultada);
-			 Intent it1 = new Intent(VisualizaNotificacaoActivity.this, ListarNotificacoesActivity.class);
+			 Intent it1 = new Intent(VisualizaNotificacaoActivity.this, MainActivity.class);
 			 startActivity(it1);
 			 Toast.makeText(this, "Notificação excluída com sucesso!" , Toast.LENGTH_LONG).show();
 			 break;
