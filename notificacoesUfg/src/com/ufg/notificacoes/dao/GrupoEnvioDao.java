@@ -16,7 +16,7 @@ import com.ufg.notificacoes.bean.GrupoEnvio;
 
 public class GrupoEnvioDao extends SQLiteOpenHelper{
 
-	private static final int VERSAO = 7;
+	private static final int VERSAO = 8;
 	public static final String TABELA = "Grupoenvio";
 	private static final String DATABASE = "NotificacoesUFG";
 	
@@ -25,7 +25,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 			+ "id INTEGER PRIMARY KEY, "
 			+ "nome TEXT, "
 			+ "codigo INTEGER, "
-			+ "recebimentoAtivado INTEGER)";
+			+ "recebimentoAtivado INTEGER, visualizacaoAtivada INTEGER)";
 	
 	public GrupoEnvioDao(){
 		super(null, DATABASE, null, VERSAO);
@@ -59,7 +59,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 		
 		List<GrupoEnvio> lista = new ArrayList<GrupoEnvio>();
 		
-		String sql = "SELECT id, nome, codigo, recebimentoAtivado FROM " + TABELA + " ORDER BY nome ";
+		String sql = "SELECT id, nome, codigo, recebimentoAtivado, visualizacaoAtivada FROM " + TABELA + " ORDER BY nome ";
 		
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		
@@ -71,6 +71,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 				grupoEnvio.setNome(cursor.getString(1));
 				grupoEnvio.setCodigo(cursor.getLong(2));
 				grupoEnvio.setRecebimentoAtivado(cursor.getInt(3) == 1);
+				grupoEnvio.setVisualizacaoAtivada(cursor.getInt(4) == 1);
 				
 				lista.add(grupoEnvio);
 			}
@@ -98,6 +99,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 				grupoEnvio.setNome(cursor.getString(1));
 				grupoEnvio.setCodigo(cursor.getLong(2));
 				grupoEnvio.setRecebimentoAtivado(cursor.getInt(3) == 1);
+				grupoEnvio.setVisualizacaoAtivada(cursor.getInt(4) == 1);
 				
 				return grupoEnvio;
 			}
@@ -124,6 +126,7 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 				grupoEnvio.setNome(cursor.getString(1));
 				grupoEnvio.setCodigo(cursor.getLong(2));
 				grupoEnvio.setRecebimentoAtivado(cursor.getInt(3) == 1);
+				grupoEnvio.setVisualizacaoAtivada(cursor.getInt(4) == 1);
 				
 				return grupoEnvio;
 			}
@@ -144,6 +147,8 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 		values.put("codigo", grupoEnvio.getCodigo());
 		values.put("recebimentoAtivado", grupoEnvio.getRecebimentoAtivado() != null && 
 				grupoEnvio.getRecebimentoAtivado() ? 1 : 0);
+		values.put("visualizacaoAtivada", grupoEnvio.getVisualizacaoAtivada() != null && 
+				grupoEnvio.getVisualizacaoAtivada() ? 1 : 0);
 		
 		long id = getWritableDatabase().insert(TABELA, null, values);
 		
@@ -160,6 +165,8 @@ public class GrupoEnvioDao extends SQLiteOpenHelper{
 		values.put("codigo", grupoEnvio.getCodigo());
 		values.put("recebimentoAtivado", grupoEnvio.getRecebimentoAtivado() != null && 
 				grupoEnvio.getRecebimentoAtivado() ? 1 : 0);
+		values.put("visualizacaoAtivada", grupoEnvio.getVisualizacaoAtivada() != null && 
+				grupoEnvio.getVisualizacaoAtivada() ? 1 : 0);
 		
 		long id = getWritableDatabase().update(TABELA,values, " id = " + grupoEnvio.getId(), null);
 		

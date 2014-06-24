@@ -14,7 +14,7 @@ import com.ufg.notificacoes.bean.Usuario;
 
 public class ConfiguracoesDao extends SQLiteOpenHelper{
 	
-	private static final int VERSAO = 7;
+	private static final int VERSAO = 8;
 	private static final String TABELA = "Configuracoes";
 	private static final String DATABASE = "NotificacoesUFG";
 	

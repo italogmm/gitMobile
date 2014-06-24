@@ -18,7 +18,7 @@ import com.ufg.notificacoes.bean.Notificacao;
 
 public class NotificacaoDao extends SQLiteOpenHelper{
 
-	private static final int VERSAO = 7;
+	private static final int VERSAO = 8;
 	private static final String TABELA = "Notificacao";
 	private static final String DATABASE = "NotificacoesUFG";
 	
@@ -60,7 +60,7 @@ public class NotificacaoDao extends SQLiteOpenHelper{
 		
 		String sql = "SELECT bean.id, bean.texto, bean.dataNotificacao, bean.lida, "
 				+ "gpEnvio.id, gpEnvio.nome, gpEnvio.codigo, gpEnvio.recebimentoAtivado FROM " + TABELA + " bean "
-				+ " left join " + GrupoEnvioDao.TABELA + " gpEnvio on gpEnvio.id = bean.id_grupo_envio ";
+				+ " left join " + GrupoEnvioDao.TABELA + " gpEnvio on gpEnvio.id = bean.id_grupo_envio where gpEnvio.visualizacaoAtivada = 1 ";
 		
 		Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 		

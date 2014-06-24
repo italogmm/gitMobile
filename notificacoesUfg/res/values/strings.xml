@@ -9,6 +9,7 @@
     <string name="action_configurar_recebimento">Configurar recebimento</string>
     <string name="action_logout">Logout</string>
     <string name="action_login">Login</string>
+    <string name="action_configurar_visualizacao">Configurar visualização</string>
     <string name="action_entrar">Entrar</string>
     <string name="title_activity_inicio">Inicio</string>
     <string name="title_activity_consulta_notificacao">Visualização de notificação</string>

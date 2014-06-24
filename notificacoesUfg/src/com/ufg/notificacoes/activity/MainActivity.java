@@ -2,7 +2,9 @@ package com.ufg.notificacoes.activity;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,8 +17,10 @@ import android.widget.ListView;
 import com.ufg.notificacoes.R;
 import com.ufg.notificacoes.activity.adapter.NotificacaoListAdapter;
 import com.ufg.notificacoes.bean.Configuracoes;
+import com.ufg.notificacoes.bean.GrupoEnvio;
 import com.ufg.notificacoes.bean.Notificacao;
 import com.ufg.notificacoes.dao.ConfiguracoesDao;
+import com.ufg.notificacoes.dao.GrupoEnvioDao;
 import com.ufg.notificacoes.dao.NotificacaoDao;
 import com.ufg.notificacoes.util.GoogleCloudMessaging;
 
@@ -24,6 +28,7 @@ public class MainActivity extends ListActivity {
 
 	private List<Notificacao> notificacoes;
 	ConfiguracoesDao configDao;
+	GrupoEnvioDao grupoEnvioDao;
 	private static boolean primeiraExecucao = true;
 	private static boolean gcmAtivo = false;
 
@@ -32,6 +37,7 @@ public class MainActivity extends ListActivity {
 
 		super.onCreate(savedInstanceState);
 		configDao = new ConfiguracoesDao(this);
+		grupoEnvioDao = new GrupoEnvioDao(this);
 		
 		if (!gcmAtivo || primeiraExecucao
 				|| !GoogleCloudMessaging.isAtivo(getApplicationContext())) {
@@ -48,15 +54,18 @@ public class MainActivity extends ListActivity {
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		
+
 		Configuracoes config = configDao.consultar();
 
 		MenuItem menuItemLogout = menu.findItem(R.id.action_logout);
-		menuItemLogout.setVisible(config != null && config.getUsuarioLogado() != null);
-		
-		MenuItem menuItemLogin= menu.findItem(R.id.action_login);
-		menuItemLogin.setVisible(config != null && config.getUtilizandoSemLogin() != null && config.getUtilizandoSemLogin());
-		
+		menuItemLogout.setVisible(config != null
+				&& config.getUsuarioLogado() != null);
+
+		MenuItem menuItemLogin = menu.findItem(R.id.action_login);
+		menuItemLogin.setVisible(config != null
+				&& config.getUtilizandoSemLogin() != null
+				&& config.getUtilizandoSemLogin());
+
 		return true;
 	}
 
@@ -74,7 +83,8 @@ public class MainActivity extends ListActivity {
 			config.setUsuarioLogado(null);
 			config.setUtilizandoSemLogin(false);
 			configDao.alterar(config);
-			Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
+			Intent intentLogin = new Intent(MainActivity.this,
+					LoginActivity.class);
 			MainActivity.this.startActivity(intentLogin);
 			break;
 		case R.id.action_login:
@@ -85,11 +95,53 @@ public class MainActivity extends ListActivity {
 			Intent itLogin = new Intent(MainActivity.this, LoginActivity.class);
 			MainActivity.this.startActivity(itLogin);
 			break;
+		case R.id.action_filtrar:
+			abrirMenuFiltragem();
+			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		
+
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void abrirMenuFiltragem() {
+		final List<GrupoEnvio> gruposEnvio = grupoEnvioDao.listar();
+		
+		CharSequence[] charSequences = new CharSequence[gruposEnvio.size()];
+		final boolean[] checados = new boolean[gruposEnvio.size()];
+		
+		int x= 0;
+		for(GrupoEnvio grupoEnvio : gruposEnvio){
+			charSequences[x] = grupoEnvio.getNome();
+			checados[x] = grupoEnvio.getVisualizacaoAtivada();
+			x++;
+		}
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Filtrar por grupo de envio:");
+		builder.setMultiChoiceItems(charSequences, checados,
+				new DialogInterface.OnMultiChoiceClickListener() {
+					public void onClick(DialogInterface arg0, int arg1,
+							boolean arg2) {
+						checados[arg1] = arg2;
+					}
+				});
+		builder.setPositiveButton("Confirmar",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						int x = 0;
+						for (boolean ch : checados) {
+							GrupoEnvio grp = gruposEnvio.get(x);
+							grp.setVisualizacaoAtivada(ch);
+							grupoEnvioDao.alterar(grp);
+							x++;
+						}
+						carregarLista();
+					}
+				});
+		AlertDialog alerta = builder.create();
+		alerta.show();
 	}
 
 	@Override
@@ -126,8 +178,7 @@ public class MainActivity extends ListActivity {
 				public void onItemClick(AdapterView<?> Parent, View view,
 						int position, long id) {
 
-					Intent intent = new Intent(MainActivity.this,
-							VisualizaNotificacaoActivity.class);
+					Intent intent = new Intent(MainActivity.this, VisualizaNotificacaoActivity.class);
 					Bundle sendBundle = new Bundle();
 					sendBundle.putLong("idNotificacao", view.getId());
 					intent.putExtras(sendBundle);
@@ -135,6 +186,8 @@ public class MainActivity extends ListActivity {
 					MainActivity.this.startActivity(intent);
 				}
 			});
+		}else{
+			setListAdapter(null);
 		}
 	}
 

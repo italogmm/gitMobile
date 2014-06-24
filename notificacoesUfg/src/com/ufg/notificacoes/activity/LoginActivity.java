@@ -223,12 +223,14 @@ public class LoginActivity extends Activity {
 			grupoEnvioUFG.setNome("Universidade Federal de Goiás");
 			grupoEnvioUFG.setRecebimentoAtivado(true);
 			grupoEnvioUFG.setCodigo(0l);
+			grupoEnvioUFG.setVisualizacaoAtivada(true);
 			grupoEnvioUFG = grupoEnvioDao.cadastrar(grupoEnvioUFG);
 			
 			GrupoEnvio grupoEnvioEngSoftware = new GrupoEnvio();
 			grupoEnvioEngSoftware.setNome("Engenharia de Software");
 			grupoEnvioEngSoftware.setRecebimentoAtivado(true);
 			grupoEnvioEngSoftware.setCodigo(5277l);
+			grupoEnvioEngSoftware.setVisualizacaoAtivada(true);
 			grupoEnvioEngSoftware = grupoEnvioDao.cadastrar(grupoEnvioEngSoftware);
 			
 			Notificacao notificacao1 = new Notificacao();
