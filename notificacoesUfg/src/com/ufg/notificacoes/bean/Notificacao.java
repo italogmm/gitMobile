@@ -60,7 +60,7 @@ public class Notificacao {
 		if(timeData == null)
 			return "";
 		
-		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
 		Date data = new Date(timeData);
 		return dataFormatada.format(data);
 	}

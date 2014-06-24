@@ -220,7 +220,7 @@ public class LoginActivity extends Activity {
 			usuario = usuarioDao.cadastrar(usuario);
 	
 			GrupoEnvio grupoEnvioUFG = new GrupoEnvio();
-			grupoEnvioUFG.setNome("Universidade Federal de Goiás");
+			grupoEnvioUFG.setNome("Gerência de projeto");
 			grupoEnvioUFG.setRecebimentoAtivado(true);
 			grupoEnvioUFG.setCodigo(0l);
 			grupoEnvioUFG.setVisualizacaoAtivada(true);
